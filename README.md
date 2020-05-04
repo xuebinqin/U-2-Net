@@ -14,7 +14,7 @@ The code for our newly accepted paper in Pattern Recognition 2020: "U^2-Net: Goi
 
 ## Qualitative Comparison
 
-![Qualitative Comparison](qual.png)
+![Qualitative Comparison](qual.png?raw=true)
 
 ## Citation
 ```
