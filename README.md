@@ -4,7 +4,7 @@ The code for our newly accepted paper in Pattern Recognition 2020: "U^2-Net: Goi
 __Contact__: xuebin[at]ualberta[dot]ca
 
 
-## Related Work: [BASNet](https://github.com/NathanUA/BASNet)
+## Our previous work: [BASNet (CVPR 2019)](https://github.com/NathanUA/BASNet)
 
 
 ## The code will be released soon (2020-May-04) !
