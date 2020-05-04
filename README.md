@@ -9,7 +9,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 ## Our previous work: [BASNet (CVPR 2019)](https://github.com/NathanUA/BASNet)
 
 
-## Architecture
+## U^2-Net Architecture
 
 ![U^2-Net architecture](U2NETPR.png)
 
