@@ -5,7 +5,7 @@ The code for our newly accepted paper in Pattern Recognition 2020: "U^2-Net: Goi
 
 ## Architecture
 
-![U^2-Net architecture](https://github.com/NathanUA/U-2-Net/blob/master/U2NETPR.png = 720x800)
+![U^2-Net architecture](U2NETPR.png)
 
 ## Quantitative Comparison
 
