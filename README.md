@@ -1,4 +1,4 @@
-# <a href="https://www.codecogs.com/eqnedit.php?latex=U^2-Net" target="_blank"><img src="https://latex.codecogs.com/gif.latex?U^2-Net" title="U^2-Net" /></a>
+## U^2-Net
 The code for our newly accepted paper in Pattern Recognition 2020: "U^2-Net: Going Deeper with Nested U-Structure for Salient Object Detection."
 
 ## The code will be released soon (2020-May-05) !
