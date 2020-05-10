@@ -120,7 +120,7 @@ def main():
         pred = normPRED(pred)
 
         # save results to test_results folder
-        # save_output(img_name_list[i_test], pred, prediction_dir)
+        save_output(img_name_list[i_test], pred, prediction_dir)
 
         del d1, d2, d3, d4, d5, d6, d7
 
