@@ -7,6 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms#, utils
+import argparse
 # import torch.optim as optim
 
 import numpy as np
@@ -30,20 +31,10 @@ def normPRED(d):
 
     return dn
 
-def save_output(image_name,pred,d_dir):
+def save_output(image_name,pred,d_dir, colored=False):
     predict = pred
     predict = predict.squeeze()
     predict_np = predict.cpu().data.numpy()
-
-    # Colored imaged
-    oriimg = Image.open(image_name)
-    bin_image = predict_np*255
-    bin_image = Image.fromarray(bin_image).convert('RGB')
-    bin_image = bin_image.resize((oriimg.width, oriimg.height), resample=Image.BILINEAR)
-    bin_image = np.array(bin_image)
-    bin_image = bin_image.clip(max=1, min=0)
-    colored_img = bin_image * np.array(oriimg)
-    colored_img = Image.fromarray(colored_img)
 
     im = Image.fromarray(predict_np*255).convert('RGB')
     img_name = image_name.split("/")[-1]
@@ -57,9 +48,19 @@ def save_output(image_name,pred,d_dir):
         imidx = imidx + "." + bbb[i]
 
     imo.save(d_dir+imidx+'.png')
-    colored_img.save(d_dir+imidx+'_COLORED.png')
 
-def main():
+    if colored:
+        oriimg = Image.open(image_name)
+        bin_image = predict_np*255
+        bin_image = Image.fromarray(bin_image).convert('RGB')
+        bin_image = bin_image.resize((oriimg.width, oriimg.height), resample=Image.BILINEAR)
+        bin_image = np.array(bin_image)
+        bin_image = bin_image.clip(max=1, min=0)
+        colored_img = bin_image * np.array(oriimg)
+        colored_img = Image.fromarray(colored_img)
+        colored_img.save(d_dir+imidx+'_COLORED.png')
+
+def main(colored=False):
 
     # --------- 1. get image path and name ---------
     model_name='u2net'#u2netp
@@ -116,9 +117,12 @@ def main():
         pred = normPRED(pred)
 
         # save results to test_results folder
-        save_output(img_name_list[i_test],pred,prediction_dir)
+        save_output(img_name_list[i_test],pred,prediction_dir, colored=colored)
 
         del d1,d2,d3,d4,d5,d6,d7
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--colored', default=False, type=bool, dest='colored', help='Save the colored version of the result. Default=False.')
+    args = parser.parse_args()
+    main(args.colored)
