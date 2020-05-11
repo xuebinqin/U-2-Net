@@ -1,0 +1,6 @@
+venv
+saved_models/u2net/*.pth
+test_data/**/*
+model/**/*.pyc
+.tmuxinator.yml
+__pycache__

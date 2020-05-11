@@ -55,10 +55,19 @@ def save_output(image_name,pred,d_dir, colored=False):
         bin_image = Image.fromarray(bin_image).convert('RGB')
         bin_image = bin_image.resize((oriimg.width, oriimg.height), resample=Image.BILINEAR)
         bin_image = np.array(bin_image)
-        bin_image = bin_image.clip(max=1, min=0)
+        bin_image = np.where(bin_image > 200, 1, 0)
         colored_img = bin_image * np.array(oriimg)
-        colored_img = Image.fromarray(colored_img)
-        colored_img.save(d_dir+imidx+'_COLORED.png')
+        colored_img = Image.fromarray(colored_img.astype(np.uint8))
+        img = colored_img.convert("RGBA")
+        datas = img.getdata()
+        newData = []
+        for item in datas:
+            if item[0] == 0 and item[1] == 0 and item[2] == 0:
+                newData.append((0, 0, 0, 0))
+            else:
+                newData.append(item)
+        img.putdata(newData)
+        img.save(d_dir+imidx+'_COLORED.png', 'PNG')
 
 def main(colored=False):
 
@@ -92,7 +101,7 @@ def main(colored=False):
     elif(model_name=='u2netp'):
         print("...load U2NEP---4.7 MB")
         net = U2NETP(3,1)
-    net.load_state_dict(torch.load(model_dir))
+    net.load_state_dict(torch.load(model_dir, map_location=torch.device('cpu')))
     if torch.cuda.is_available():
         net.cuda()
     net.eval()

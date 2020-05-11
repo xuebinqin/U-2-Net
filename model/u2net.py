@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 from torchvision import models
-import torch.nn.functional as F
 
 class REBNCONV(nn.Module):
     def __init__(self,in_ch=3,out_ch=3,dirate=1):
@@ -52,7 +51,7 @@ class RSU7(nn.Module):#UNet07DRES(nn.Module):
         self.rebnconv2d = REBNCONV(mid_ch*2,mid_ch,dirate=1)
         self.rebnconv1d = REBNCONV(mid_ch*2,out_ch,dirate=1)
 
-        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear')
+        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
 
     def forward(self,x):
 
@@ -127,7 +126,7 @@ class RSU6(nn.Module):#UNet06DRES(nn.Module):
         self.rebnconv2d = REBNCONV(mid_ch*2,mid_ch,dirate=1)
         self.rebnconv1d = REBNCONV(mid_ch*2,out_ch,dirate=1)
 
-        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear')
+        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
 
     def forward(self,x):
 
@@ -194,7 +193,7 @@ class RSU5(nn.Module):#UNet05DRES(nn.Module):
         self.rebnconv2d = REBNCONV(mid_ch*2,mid_ch,dirate=1)
         self.rebnconv1d = REBNCONV(mid_ch*2,out_ch,dirate=1)
 
-        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear')
+        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
 
     def forward(self,x):
 
@@ -250,7 +249,7 @@ class RSU4(nn.Module):#UNet04DRES(nn.Module):
         self.rebnconv2d = REBNCONV(mid_ch*2,mid_ch,dirate=1)
         self.rebnconv1d = REBNCONV(mid_ch*2,out_ch,dirate=1)
 
-        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear')
+        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
 
     def forward(self,x):
 
@@ -352,11 +351,11 @@ class U2NET(nn.Module):
         self.side5 = nn.Conv2d(512,1,3,padding=1)
         self.side6 = nn.Conv2d(512,1,3,padding=1)
 
-        self.upscore6 = nn.Upsample(scale_factor=32,mode='bilinear')
-        self.upscore5 = nn.Upsample(scale_factor=16,mode='bilinear')
-        self.upscore4 = nn.Upsample(scale_factor=8,mode='bilinear')
-        self.upscore3 = nn.Upsample(scale_factor=4,mode='bilinear')
-        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear')
+        self.upscore6 = nn.Upsample(scale_factor=32,mode='bilinear', align_corners=False)
+        self.upscore5 = nn.Upsample(scale_factor=16,mode='bilinear', align_corners=False)
+        self.upscore4 = nn.Upsample(scale_factor=8,mode='bilinear', align_corners=False)
+        self.upscore3 = nn.Upsample(scale_factor=4,mode='bilinear', align_corners=False)
+        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
 
         self.outconv = nn.Conv2d(6,1,1)
 
@@ -426,7 +425,7 @@ class U2NET(nn.Module):
 
         d0 = self.outconv(torch.cat((d1,d2,d3,d4,d5,d6),1))
 
-        return F.sigmoid(d0), F.sigmoid(d1), F.sigmoid(d2), F.sigmoid(d3), F.sigmoid(d4), F.sigmoid(d5), F.sigmoid(d6)
+        return torch.sigmoid(d0), torch.sigmoid(d1), torch.sigmoid(d2), torch.sigmoid(d3), torch.sigmoid(d4), torch.sigmoid(d5), torch.sigmoid(d6)
 
 ### U^2-Net small ###
 class U2NETP(nn.Module):
@@ -465,11 +464,11 @@ class U2NETP(nn.Module):
         self.side5 = nn.Conv2d(64,1,3,padding=1)
         self.side6 = nn.Conv2d(64,1,3,padding=1)
 
-        self.upscore6 = nn.Upsample(scale_factor=32,mode='bilinear')
-        self.upscore5 = nn.Upsample(scale_factor=16,mode='bilinear')
-        self.upscore4 = nn.Upsample(scale_factor=8,mode='bilinear')
-        self.upscore3 = nn.Upsample(scale_factor=4,mode='bilinear')
-        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear')
+        self.upscore6 = nn.Upsample(scale_factor=32,mode='bilinear', align_corners=False)
+        self.upscore5 = nn.Upsample(scale_factor=16,mode='bilinear', align_corners=False)
+        self.upscore4 = nn.Upsample(scale_factor=8,mode='bilinear', align_corners=False)
+        self.upscore3 = nn.Upsample(scale_factor=4,mode='bilinear', align_corners=False)
+        self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
 
         self.outconv = nn.Conv2d(6,1,1)
 
@@ -538,4 +537,4 @@ class U2NETP(nn.Module):
         d0 = self.outconv(torch.cat((d1,d2,d3,d4,d5,d6),1))
         # d00 = d0 + self.refconv(d0)
 
-        return F.sigmoid(d0), F.sigmoid(d1), F.sigmoid(d2), F.sigmoid(d3), F.sigmoid(d4), F.sigmoid(d5), F.sigmoid(d6)
+        return torch.sigmoid(d0), torch.sigmoid(d1), torch.sigmoid(d2), torch.sigmoid(d3), torch.sigmoid(d4), torch.sigmoid(d5), torch.sigmoid(d6)
