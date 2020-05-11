@@ -31,17 +31,24 @@ def normPRED(d):
     return dn
 
 def save_output(image_name,pred,d_dir):
-
     predict = pred
     predict = predict.squeeze()
     predict_np = predict.cpu().data.numpy()
+
+    # Colored imaged
+    oriimg = Image.open(image_name)
+    bin_image = predict_np*255
+    bin_image = Image.fromarray(bin_image).convert('RGB')
+    bin_image = bin_image.resize((oriimg.width, oriimg.height), resample=Image.BILINEAR)
+    bin_image = np.array(bin_image)
+    bin_image = bin_image.clip(max=1, min=0)
+    colored_img = bin_image * np.array(oriimg)
+    colored_img = Image.fromarray(colored_img)
 
     im = Image.fromarray(predict_np*255).convert('RGB')
     img_name = image_name.split("/")[-1]
     image = io.imread(image_name)
     imo = im.resize((image.shape[1],image.shape[0]),resample=Image.BILINEAR)
-
-    pb_np = np.array(imo)
 
     aaa = img_name.split(".")
     bbb = aaa[0:-1]
@@ -50,6 +57,7 @@ def save_output(image_name,pred,d_dir):
         imidx = imidx + "." + bbb[i]
 
     imo.save(d_dir+imidx+'.png')
+    colored_img.save(d_dir+imidx+'_COLORED.png')
 
 def main():
 
