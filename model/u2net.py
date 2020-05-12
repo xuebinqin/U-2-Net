@@ -345,12 +345,12 @@ class U2NET(nn.Module):
         self.stage2d = RSU6(256,32,64)
         self.stage1d = RSU7(128,16,64)
 
-        self.side1 = nn.Conv2d(64,1,3,padding=1)
-        self.side2 = nn.Conv2d(64,1,3,padding=1)
-        self.side3 = nn.Conv2d(128,1,3,padding=1)
-        self.side4 = nn.Conv2d(256,1,3,padding=1)
-        self.side5 = nn.Conv2d(512,1,3,padding=1)
-        self.side6 = nn.Conv2d(512,1,3,padding=1)
+        self.side1 = nn.Conv2d(64,out_ch,3,padding=1)
+        self.side2 = nn.Conv2d(64,out_ch,3,padding=1)
+        self.side3 = nn.Conv2d(128,out_ch,3,padding=1)
+        self.side4 = nn.Conv2d(256,out_ch,3,padding=1)
+        self.side5 = nn.Conv2d(512,out_ch,3,padding=1)
+        self.side6 = nn.Conv2d(512,out_ch,3,padding=1)
 
         self.upscore6 = nn.Upsample(scale_factor=32,mode='bilinear')
         self.upscore5 = nn.Upsample(scale_factor=16,mode='bilinear')
@@ -358,7 +358,7 @@ class U2NET(nn.Module):
         self.upscore3 = nn.Upsample(scale_factor=4,mode='bilinear')
         self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear')
 
-        self.outconv = nn.Conv2d(6,1,1)
+        self.outconv = nn.Conv2d(6*out_ch,1,1)
 
     def forward(self,x):
 
@@ -458,12 +458,12 @@ class U2NETP(nn.Module):
         self.stage2d = RSU6(128,16,64)
         self.stage1d = RSU7(128,16,64)
 
-        self.side1 = nn.Conv2d(64,1,3,padding=1)
-        self.side2 = nn.Conv2d(64,1,3,padding=1)
-        self.side3 = nn.Conv2d(64,1,3,padding=1)
-        self.side4 = nn.Conv2d(64,1,3,padding=1)
-        self.side5 = nn.Conv2d(64,1,3,padding=1)
-        self.side6 = nn.Conv2d(64,1,3,padding=1)
+        self.side1 = nn.Conv2d(64,out_ch,3,padding=1)
+        self.side2 = nn.Conv2d(64,out_ch,3,padding=1)
+        self.side3 = nn.Conv2d(64,out_ch,3,padding=1)
+        self.side4 = nn.Conv2d(64,out_ch,3,padding=1)
+        self.side5 = nn.Conv2d(64,out_ch,3,padding=1)
+        self.side6 = nn.Conv2d(64,out_ch,3,padding=1)
 
         self.upscore6 = nn.Upsample(scale_factor=32,mode='bilinear')
         self.upscore5 = nn.Upsample(scale_factor=16,mode='bilinear')
@@ -471,7 +471,7 @@ class U2NETP(nn.Module):
         self.upscore3 = nn.Upsample(scale_factor=4,mode='bilinear')
         self.upscore2 = nn.Upsample(scale_factor=2, mode='bilinear')
 
-        self.outconv = nn.Conv2d(6,1,1)
+        self.outconv = nn.Conv2d(6*out_ch,out_ch,1)
 
     def forward(self,x):
 
