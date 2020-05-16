@@ -1,4 +1,4 @@
-# U^2-Net
+# U^2-Net (U square net)
 
 The code for our newly accepted paper **U^2-Net (U square net)** in Pattern Recognition 2020:
 ## [U^2-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://www.sciencedirect.com/science/article/pii/S0031320320302077?dgcid=author)
