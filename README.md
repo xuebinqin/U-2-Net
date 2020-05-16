@@ -12,7 +12,7 @@ The code for our newly accepted paper **U^2-Net (U square net)** in Pattern Reco
 
 __Contact__: xuebin[at]ualberta[dot]ca
 
-## News !!!
+## Updates !!!
 
 **(2020-May-16)** The official paper of our **U^2-Net (U square net)** ([**PDF in elsevier**](https://www.sciencedirect.com/science/article/pii/S0031320320302077?dgcid=author)) is now available. If you are not able to access that, please feel free to drop me an email.
 
