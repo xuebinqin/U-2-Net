@@ -1,7 +1,14 @@
 # U^2-Net
 
 The code for our newly accepted paper in Pattern Recognition 2020:
-## [U^2-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://www.sciencedirect.com/science/article/pii/S0031320320302077?dgcid=author), <br/>[Xuebin Qin](https://webdocs.cs.ualberta.ca/~xuebin/), <br/>[Zichen Zhang](https://webdocs.cs.ualberta.ca/~zichen2/), [Chenyang Huang](https://chenyangh.com/), <br/>[Masood Dehghan](https://sites.google.com/view/masooddehghan), <br/>[Osmar R. Zaiane](http://webdocs.cs.ualberta.ca/~zaiane/) and <br/>[Martin Jagersand](https://webdocs.cs.ualberta.ca/~jag/).
+## [U^2-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://www.sciencedirect.com/science/article/pii/S0031320320302077?dgcid=author)
+
+[Xuebin Qin](https://webdocs.cs.ualberta.ca/~xuebin/), <br/>
+[Zichen Zhang](https://webdocs.cs.ualberta.ca/~zichen2/), <br/>
+[Chenyang Huang](https://chenyangh.com/), <br/>
+[Masood Dehghan](https://sites.google.com/view/masooddehghan), <br/>
+[Osmar R. Zaiane](http://webdocs.cs.ualberta.ca/~zaiane/) and <br/>
+[Martin Jagersand](https://webdocs.cs.ualberta.ca/~jag/).
 
 __Contact__: xuebin[at]ualberta[dot]ca
 
