@@ -70,8 +70,8 @@ or ```python u2net_test.py``` respectively. The 'model_name' in both files can b
 ## Citation
 ```
 @InProceedings{Qin_2020_PR,
+title = {U2-Net: Going Deeper with Nested U-Structure for Salient Object Detection},
 author = {Qin, Xuebin and Zhang, Zichen and Huang, Chenyang and Dehghan, Masood and Zaiane, Osmar and Jagersand, Martin},
-title = {U^2-Net: Going Deeper with Nested U-Structure for Salient Object Detection},
 journal = {Pattern Recognition},
 volume = {106},
 pages = {107404},
