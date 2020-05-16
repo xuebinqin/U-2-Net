@@ -1,9 +1,17 @@
 # U^2-Net
 
 The code for our newly accepted paper in Pattern Recognition 2020:
-## U^2-Net: Going Deeper with Nested U-Structure for Salient Object Detection, [Xuebin Qin](https://webdocs.cs.ualberta.ca/~xuebin/), [Zichen Zhang](https://webdocs.cs.ualberta.ca/~zichen2/), [Chenyang Huang](https://chenyangh.com/), [Masood Dehghan](https://sites.google.com/view/masooddehghan), [Osmar R. Zaiane](http://webdocs.cs.ualberta.ca/~zaiane/) and [Martin Jagersand](https://webdocs.cs.ualberta.ca/~jag/).
+## [U^2-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://www.sciencedirect.com/science/article/pii/S0031320320302077?dgcid=author), [Xuebin Qin](https://webdocs.cs.ualberta.ca/~xuebin/), [Zichen Zhang](https://webdocs.cs.ualberta.ca/~zichen2/), [Chenyang Huang](https://chenyangh.com/), [Masood Dehghan](https://sites.google.com/view/masooddehghan), [Osmar R. Zaiane](http://webdocs.cs.ualberta.ca/~zaiane/) and [Martin Jagersand](https://webdocs.cs.ualberta.ca/~jag/).
 
 __Contact__: xuebin[at]ualberta[dot]ca
+
+## News
+
+(2020-May-16) The official paper of U^2-Net (U square net) [PDF in elsevier](https://www.sciencedirect.com/science/article/pii/S0031320320302077?dgcid=author) is now available. If you are not able to access that, please feel free to drop me an email.
+
+(2020-May-16) We fix the upsampling issue of the network. Now, the model should be able to handle *arbitrary* input size. (Tips: This modification is to facilitate the retraining of U^2-Net on your own datasets. When using our pre-trained model on SOD datasets, please keep the input size as 320x32 to guarantee the performance.)
+
+(2020-May-16) We highly appreciate Cyril Diagne for building this fantastic AR project: [AR Copy and Paste](https://github.com/cyrildiagne/ar-cutpaste) using our [BASNet](https://github.com/NathanUA/BASNet) and U^2-Net. The [demo video](https://twitter.com/cyrildiagne/status/1256916982764646402) has achieved over 5M views, which is phenomenal and show us more probabilities of SOD.
 
 ## U^2-Net Results (173.6 MB)
 
