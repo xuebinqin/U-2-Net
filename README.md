@@ -11,7 +11,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 **(2020-May-16)** We fixed the upsampling issue of the network. Now, the model should be able to handle **arbitrary input size**. (Tips: This modification is to facilitate the retraining of U^2-Net on your own datasets. When using our pre-trained model on SOD datasets, please keep the input size as 320x32 to guarantee the performance.)
 
-**(2020-May-16)** We highly appreciate Cyril Diagne for building this fantastic AR project: [AR Copy and Paste](https://github.com/cyrildiagne/ar-cutpaste) using our **U^2-Net** and [**BASNet**](https://github.com/NathanUA/BASNet). The [demo video](https://twitter.com/cyrildiagne/status/1256916982764646402) in twitter has achieved over **5M** views, which is phenomenal and shows us more probabilities of SOD.
+**(2020-May-16)** We highly appreciate **Cyril Diagne** for building this fantastic AR project: [AR Copy and Paste](https://github.com/cyrildiagne/ar-cutpaste) using our **U^2-Net** (Qin *et al*, PR 2020) and [**BASNet**](https://github.com/NathanUA/BASNet)(CVPR19, Qin *et al*, CVPR 2019). The [demo video](https://twitter.com/cyrildiagne/status/1256916982764646402) in twitter has achieved over **5M** views, which is phenomenal and shows us more probabilities of SOD.
 
 ## U^2-Net Results (173.6 MB)
 
