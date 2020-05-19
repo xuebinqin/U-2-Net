@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-from torchvision import models
 import torch.nn.functional as F
 
 class REBNCONV(nn.Module):
