@@ -15,10 +15,24 @@ import numpy as np
 
 app = Flask(__name__, template_folder="templates", static_url_path="/static")
 
+# Init Cartoonizer and load its weights
+wb_cartoonizer = WB_Cartoonize(os.path.abspath("test_code/saved_models/"))
+
+requests_queue = Queue()
+BATCH_SIZE = 1
+CHECK_INTERVAL = 0.1
+##################################################################
+
 
 @app.route("/")
 def main():
     return render_template("index.html")
+
+
+@app.route("/predict")
+def predict():
+    print('req')
+    return render_template("hi.html")
 
 
 if __name__ == "__main__":
