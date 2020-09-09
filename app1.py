@@ -69,7 +69,7 @@ def run(input_file, file_type, f_path):
             output_img_name = os.path.join(f_path, f_name+".png")
             # return result_path
 
-            result_path = cartoonized_img_name
+            result_path = output_img_name
 
             return result_path
 
