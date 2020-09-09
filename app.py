@@ -1,3 +1,4 @@
+from cartoonize import WB_Cartoonize
 import os
 import io
 import uuid
@@ -15,21 +16,19 @@ import numpy as np
 
 sys.path.insert(0, "./test_code/")
 
-from cartoonize import WB_Cartoonize
 
 ###################################################################
 app = Flask(__name__, template_folder="templates", static_url_path="/static")
-app.config["MAX_CONTENT_LENGTH"] = 35 * 1024 * 1024
 
-DATA_FOLDER = "data"
-
-## Init Cartoonizer and load its weights
+# Init Cartoonizer and load its weights
 wb_cartoonizer = WB_Cartoonize(os.path.abspath("test_code/saved_models/"))
 
 requests_queue = Queue()
 BATCH_SIZE = 1
 CHECK_INTERVAL = 0.1
 ##################################################################
+
+
 def convert_bytes_to_image(img_bytes):
     """Convert bytes to numpy array
     Args:
@@ -57,45 +56,18 @@ def run(input_file, file_type, f_path):
 
             img = input_file.read()
 
-            ## Read Image and convert to PIL (RGB) if RGBA convert appropriately
+            # Read Image and convert to PIL (RGB) if RGBA convert appropriately
             image = convert_bytes_to_image(img)
 
             cartoon_image = wb_cartoonizer.infer(image)
 
             cartoonized_img_name = os.path.join(f_path, f_name + ".jpg")
             cv2.imwrite(
-                cartoonized_img_name, cv2.cvtColor(cartoon_image, cv2.COLOR_RGB2BGR)
+                cartoonized_img_name, cv2.cvtColor(
+                    cartoon_image, cv2.COLOR_RGB2BGR)
             )
 
             result_path = cartoonized_img_name
-
-            return result_path
-
-        if file_type == "video":
-            f_name = input_file.filename
-
-            video = input_file
-
-            original_video_path = os.path.join(f_path, f_name)
-            video.save(original_video_path)
-
-            # Slice, Resize and Convert Video to 15fps
-            modified_video_path = os.path.join(
-                f_path, f_name.split(".")[0] + "_modified.mp4"
-            )
-            width_resize = 480
-            os.system(
-                "ffmpeg -hide_banner -loglevel warning -ss 0 -i '{}' -t 10 -filter:v scale={}:-2 -r 15 -c:a copy '{}'".format(
-                    os.path.abspath(original_video_path),
-                    width_resize,
-                    os.path.abspath(modified_video_path),
-                )
-            )
-
-            # if local then "output_uri" is a file path
-            output_uri = wb_cartoonizer.process_video(modified_video_path)
-
-            result_path = output_uri
 
             return result_path
 
@@ -115,7 +87,8 @@ def handle_requests_by_batch():
                 # (len(requests_batch) > 0 #and time.time() - requests_batch[0]['time'] > BATCH_TIMEOUT)
             ):
                 try:
-                    requests_batch.append(requests_queue.get(timeout=CHECK_INTERVAL))
+                    requests_batch.append(
+                        requests_queue.get(timeout=CHECK_INTERVAL))
                 except Empty:
                     continue
 
@@ -123,7 +96,8 @@ def handle_requests_by_batch():
 
             for request in requests_batch:
                 batch_outputs.append(
-                    run(request["input"][0], request["input"][1], request["input"][2])
+                    run(request["input"][0], request["input"]
+                        [1], request["input"][2])
                 )
 
             for request, output in zip(requests_batch, batch_outputs):
