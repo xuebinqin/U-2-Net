@@ -1,3 +1,4 @@
+from cartoonize import WB_Cartoonize
 import os
 import io
 import uuid
@@ -13,46 +14,97 @@ from flask import Flask, render_template, flash, send_file, request, jsonify, ur
 from PIL import Image
 import numpy as np
 
-from u2net_test import U_2net
-from werkzeug.utils import secure_filename
-#################################################################
-app = Flask(__name__, template_folder="templates", static_url_path="/static")
-#net = U_2net.getNet()
-DATA_FOLDER = "data"
-# Init Cartoonizer and load its weights
+sys.path.insert(0, "./test_code/")
 
+
+###################################################################
+app = Flask(__name__, template_folder="templates", static_url_path="/static")
+app.config["MAX_CONTENT_LENGTH"] = 35 * 1024 * 1024
+
+DATA_FOLDER = "data"
+
+# Init Cartoonizer and load its weights
+wb_cartoonizer = WB_Cartoonize(os.path.abspath("test_code/saved_models/"))
 
 requests_queue = Queue()
 BATCH_SIZE = 1
 CHECK_INTERVAL = 0.1
 ##################################################################
-# pre-train
 
-# run
+
+def convert_bytes_to_image(img_bytes):
+    """Convert bytes to numpy array
+    Args:
+        img_bytes (bytes): Image bytes read from flask.
+    Returns:
+        [numpy array]: Image numpy array
+    """
+
+    pil_image = Image.open(io.BytesIO(img_bytes))
+    if pil_image.mode == "RGBA":
+        image = Image.new("RGB", pil_image.size, (255, 255, 255))
+        image.paste(pil_image, mask=pil_image.split()[3])
+    else:
+        image = pil_image.convert("RGB")
+
+    image = np.array(image)
+
+    return image
 
 
 def run(input_file, file_type, f_path):
     try:
         if file_type == "image":
             f_name = str(uuid.uuid4())
-            save_path = f_path + '/' + f_name + '.jpg'
-            print(f_path)
-            # Original Image Save
-            input_file.save(save_path)
-            # Run model
-            # argument로 f_path 줄거임
-            # Save Output Image
 
-            # return result_path
+            img = input_file.read()
 
-            result_path = output_img_name
+            # Read Image and convert to PIL (RGB) if RGBA convert appropriately
+            image = convert_bytes_to_image(img)
+
+            cartoon_image = wb_cartoonizer.infer(image)
+
+            cartoonized_img_name = os.path.join(f_path, f_name + ".jpg")
+            cv2.imwrite(
+                cartoonized_img_name, cv2.cvtColor(
+                    cartoon_image, cv2.COLOR_RGB2BGR)
+            )
+
+            result_path = cartoonized_img_name
+
+            return result_path
+
+        if file_type == "video":
+            f_name = input_file.filename
+
+            video = input_file
+
+            original_video_path = os.path.join(f_path, f_name)
+            video.save(original_video_path)
+
+            # Slice, Resize and Convert Video to 15fps
+            modified_video_path = os.path.join(
+                f_path, f_name.split(".")[0] + "_modified.mp4"
+            )
+            width_resize = 480
+            os.system(
+                "ffmpeg -hide_banner -loglevel warning -ss 0 -i '{}' -t 10 -filter:v scale={}:-2 -r 15 -c:a copy '{}'".format(
+                    os.path.abspath(original_video_path),
+                    width_resize,
+                    os.path.abspath(modified_video_path),
+                )
+            )
+
+            # if local then "output_uri" is a file path
+            output_uri = wb_cartoonizer.process_video(modified_video_path)
+
+            result_path = output_uri
 
             return result_path
 
     except Exception as e:
         print(e)
         return 500
-# Queueing
 
 
 def handle_requests_by_batch():
@@ -88,13 +140,7 @@ def handle_requests_by_batch():
         print(e)
 
 
-# Thread Start
 threading.Thread(target=handle_requests_by_batch).start()
-
-
-@app.route("/")
-def main():
-    return render_template("index.html")
 
 
 @app.route("/predict", methods=["POST"])
@@ -112,15 +158,18 @@ def predict():
             if input_file.content_type not in ["image/jpeg", "image/jpg", "image/png"]:
                 return jsonify({"message": "Only support jpeg, jpg or png"}), 400
 
-        # mkdir and path setting
+        else:
+            if input_file.content_type not in ["video/mp4"]:
+                return jsonify({"message": "Only support mp4"}), 400
+
         f_id = str(uuid.uuid4())
         f_path = os.path.join(DATA_FOLDER, f_id)
         os.makedirs(f_path, exist_ok=True)
 
         req = {"input": [input_file, file_type, f_path]}
+
         requests_queue.put(req)
 
-        # Thread output response
         while "output" not in req:
             time.sleep(CHECK_INTERVAL)
 
@@ -140,16 +189,18 @@ def predict():
 
         return jsonify({"message": "Error! Please upload another file"}), 400
 
-    return render_template("hi.html")
-
 
 @app.route("/health")
 def health():
     return "ok"
 
 
+@app.route("/")
+def main():
+    return render_template("index.html")
+
+
 if __name__ == "__main__":
-    ne = str(uuid.uuid4())
     from waitress import serve
 
     serve(app, host="0.0.0.0", port=80)
