@@ -13,8 +13,10 @@ from flask import Flask, render_template, flash, send_file, request, jsonify, ur
 from PIL import Image
 import numpy as np
 
+from u2net_test import U_2net
+#################################################################
 app = Flask(__name__, template_folder="templates", static_url_path="/static")
-
+DATA_FOLDER = "data"
 # Init Cartoonizer and load its weights
 
 
@@ -52,21 +54,15 @@ def convert_bytes_to_image(img_bytes):
 def run(input_file, file_type, f_path):
     try:
         if file_type == "image":
+            print(input_file)
             f_name = str(uuid.uuid4())
-
             img = input_file.read()
 
-            # Image Convert
-            image = convert_bytes_to_image(img)
-            original_img = cv2.imread(image, cv2.IMREAD_UNCHANGED)
             # Original Image Save
-            original_img_name = os.path.join(f_path, f_name+".png")
-            cv2.imwrite(original_img_name, original_img)
             # Run model
-            os.system('python u2net_test.py')
-            os.system('rm ' + original_img_name)
+
             # Save Output Image
-            output_img_name = os.path.join(f_path, f_name+".png")
+
             # return result_path
 
             result_path = output_img_name
@@ -121,7 +117,7 @@ def main():
     return render_template("index.html")
 
 
-@app.route("/predict")
+@app.route("/predict", methods=["POST"])
 def predict():
     try:
         print(requests_queue.qsize())
@@ -136,13 +132,14 @@ def predict():
             if input_file.content_type not in ["image/jpeg", "image/jpg", "image/png"]:
                 return jsonify({"message": "Only support jpeg, jpg or png"}), 400
 
+        input_file.save(secure)
         # mkdir and path setting
         f_id = str(uuid.uuid4())
         f_path = os.path.join(DATA_FOLDER, f_id)
         os.makedirs(f_path, exist_ok=True)
 
         req = {"input": [input_file, file_type, f_path]}
-
+        print('큐에 들어간다')
         requests_queue.put(req)
 
         # Thread output response
@@ -174,6 +171,8 @@ def health():
 
 
 if __name__ == "__main__":
+    ne = str(uuid.uuid4())
+    print(ne)
     from waitress import serve
 
     serve(app, host="0.0.0.0", port=80)
