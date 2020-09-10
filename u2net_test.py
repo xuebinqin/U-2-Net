@@ -55,51 +55,87 @@ def save_output(image_name, pred, d_dir):
     imo.save(d_dir+imidx+'.png')
 
 
-def main():
+class U_2net:
+    def __init__(self, rt_dir):
+        print('class')
 
-    # --------- 1. get image path and name ---------
-    model_name = 'u2net'  # u2netp
+    def getData(target_path):
+        print(target_path)
+        model_name = 'u2net'  # u2netp
 
-    image_dir = os.path.join(os.getcwd(), 'test_data', 'test_images')
-    prediction_dir = os.path.join(
-        os.getcwd(), 'test_data', model_name + '_results' + os.sep)
-    model_dir = os.path.join(os.getcwd(), 'saved_models',
-                             model_name, model_name + '.pth')
+        image_dir = os.path.join(os.getcwd(), target_path)  # 이미지 위치를 받아올거임
+        prediction_dir = os.path.join(
+            os.getcwd(), target_path + os.sep)  # 이미지 위치랑 동일하게 할거임
+        model_dir = os.path.join(os.getcwd(), 'saved_models',
+                                 model_name, model_name + '.pth')
 
-    img_name_list = glob.glob(image_dir + os.sep + '*')
-    print(img_name_list)
+        img_name_list = glob.glob(image_dir + os.sep + '*')
+        print(prediction_dir)
+        return img_name_list
 
-    # --------- 2. dataloader ---------
-    # 1. dataloader
-    test_salobj_dataset = SalObjDataset(img_name_list=img_name_list,
-                                        lbl_name_list=[],
-                                        transform=transforms.Compose([RescaleT(320),
-                                                                      ToTensorLab(flag=0)])
-                                        )
-    test_salobj_dataloader = DataLoader(test_salobj_dataset,
-                                        batch_size=1,
-                                        shuffle=False,
-                                        num_workers=1)
+    def getRoot():
+        # --------- 1. get image path and name ---------
+        model_name = 'u2net'  # u2netp
 
-    # --------- 3. model define ---------
-    if(model_name == 'u2net'):
-        print("...load U2NET---173.6 MB")
-        net = U2NET(3, 1)
-    elif(model_name == 'u2netp'):
-        print("...load U2NEP---4.7 MB")
-        net = U2NETP(3, 1)
-    net.load_state_dict(torch.load(model_dir))
-    if torch.cuda.is_available():
-        net.cuda()
-    net.eval()
+        image_dir = os.path.join(
+            os.getcwd(), 'test_data', 'test_images')  # 이미지 위치를 받아올거임
+        prediction_dir = os.path.join(
+            os.getcwd(), 'test_data', model_name + '_results' + os.sep)  # 이미지 위치랑 동일하게 할거임
+        model_dir = os.path.join(os.getcwd(), 'saved_models',
+                                 model_name, model_name + '.pth')
 
-    # --------- 4. inference for each image ---------
-    for i_test, data_test in enumerate(test_salobj_dataloader):
+        img_name_list = glob.glob(image_dir + os.sep + '*')
+        print(prediction_dir)
+        return img_name_list
 
-        print("inferencing:", img_name_list[i_test].split(os.sep)[-1])
+    def getLoader(img_name_list):
+        # --------- 2. dataloader ---------
+        # 1. dataloader
+        model_name = 'u2net'
+        model_dir = os.path.join(os.getcwd(), 'saved_models',
+                                 model_name, model_name + '.pth')
+        test_salobj_dataset = SalObjDataset(img_name_list=img_name_list,
+                                            lbl_name_list=[],
+                                            transform=transforms.Compose([RescaleT(320),
+                                                                          ToTensorLab(flag=0)])
+                                            )
+        test_salobj_dataloader = DataLoader(test_salobj_dataset,
+                                            batch_size=1,
+                                            shuffle=False,
+                                            num_workers=1)
 
-        inputs_test = data_test['image']
-        inputs_test = inputs_test.type(torch.FloatTensor)
+        return test_salobj_dataloader
+
+    def getNet():
+        model_name = 'u2net'
+        model_dir = os.path.join(os.getcwd(), 'saved_models',
+                                 'u2net', 'u2net.pth')
+        # --------- 3. model define ---------
+        if(model_name == 'u2net'):
+            print("...load U2NET---173.6 MB")
+            net = U2NET(3, 1)
+        elif(model_name == 'u2netp'):
+            print("...load U2NEP---4.7 MB")
+            net = U2NETP(3, 1)
+        net.load_state_dict(torch.load(model_dir))
+        if torch.cuda.is_available():
+            net.cuda()
+            net.eval()
+        return net
+
+    def run(img_name_list, test_salobj_dataloader, net, target_path):
+
+        model_dir = os.path.join(os.getcwd(), 'saved_models',
+                                 'u2net', 'u2net' + '.pth')
+        prediction_dir = os.path.join(
+            os.getcwd(), target_path + os.sep)  # 이미지 위치랑 동일하게 할거임
+        # --------- 4. inference for each image ---------
+        for i_test, data_test in enumerate(test_salobj_dataloader):
+
+            print("inferencing:", img_name_list[i_test].split(os.sep)[-1])
+
+            inputs_test = data_test['image']
+            inputs_test = inputs_test.type(torch.FloatTensor)
 
         if torch.cuda.is_available():
             inputs_test = Variable(inputs_test.cuda())
@@ -121,4 +157,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    img_list = getRoot()
+    loader = getLoader(img_list)
+    net = getNet(loader)
+    run(img_list, loader, net)
