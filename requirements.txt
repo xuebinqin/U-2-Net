@@ -1,0 +1,10 @@
+Flask==1.0.2
+Pillow==6.2.0
+opencv_python==4.2.0.34
+waitress==1.4.4
+werkzeug==0.14.1
+numpy==1.15.2
+scikit-image==0.14.0
+PyTorch==1.6.0
+torchvision==0.7.0
+glob3==0.0.1
