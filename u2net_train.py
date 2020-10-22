@@ -160,5 +160,3 @@ for epoch in range(0, epoch_num):
             net.train()  # resume train
             ite_num4val = 0
 
-if __name__ == "__main__":
-    main()
