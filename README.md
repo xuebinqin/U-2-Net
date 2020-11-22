@@ -14,6 +14,26 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+**(2020-Nov-21)** We found a interesting application of U^2-Net for [**human protrait drawing**](https://www.pythonf.cn/read/141098). Therefore, we trained another model for this task based on the [**APDrawingGAN dataset**](https://github.com/yiranran/APDrawingGAN).
+
+[!Sample Results: Kids](figures/portrait_kids.png)
+
+[!Sample Results: Ladies](figures/portrait_ladies.png)
+
+[!Sample Results: Men](figures/portrait_men.png)
+
+### Usage
+1. Clone this repo to local
+```
+git clone https://github.com/NathanUA/U-2-Net.git
+```
+
+2. Download the [**U2net_portrait.pth**](https://drive.google.com/file/d/1IG3HdpcRiDoWNookbncQjeaPN28t90yW/view?usp=sharing) model and put it into the directory: ```./saved_models/u2net_portrait/```.
+
+3. Run on the testing set. Download the train and test set  from [**APDrawingGAN**](https://github.com/yiranran/APDrawingGAN). These images and their ground truth are stitched side-by-side (512x1024). You need to split each of these images into two 512x512 images and put them into ```./test_data/test_portrait_images/portrait_im/``. You can also download the split testing set [**here**](https://drive.google.com/file/d/1NkTsDDN8VO-JVik6VxXyV-3l2eo29KCk/view?usp=sharing). Running the inference with command ```python u2net_portrait_test.py``` will ouptut the results into ```./test_data/test_portrait_images/portrait_results```. 
+
+4. Run on your own dataset. Prepare your images and put them into ```./test_data/test_portrait_images/your_portrait_im/```. Run the prediction by command ```python u2net_portrait_demo.py``` The difference of the code for runing the test set and your own dataset is that the testing set are normalized and cropped to 512x512 for including only head of human, while your own dataset may varies with different resolution and contents. To achieve stable results, we added a simple [**face detection**](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html) step before the portrait generation in ```u2net_portrait_demo.py```. Therefore, the code will detect the biggest face from the given image and then crop, pad and resize the ROI to 512x512 for feeding to the network. 
+
 **(2020-Sep-13)** Our U^2-Net based model is the **6th** in [**MICCAI 2020 Thyroid Nodule Segmentation Challenge**](https://tn-scui2020.grand-challenge.org/Resultannouncement/).
 
 **(2020-May-18)** The official paper of our **U^2-Net (U square net)** ([**PDF in elsevier**(free until July 5 2020)](https://www.sciencedirect.com/science/article/pii/S0031320320302077?dgcid=author), [**PDF in arxiv**](http://arxiv.org/abs/2005.09007)) is now available. If you are not able to access that, please feel free to drop me an email.
@@ -34,6 +54,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 Python 3.6  
 numpy 1.15.2  
 scikit-image 0.14.0  
+python-opencv
 PIL 5.2.0  
 PyTorch 0.4.0  
 torchvision 0.2.1  
