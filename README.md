@@ -22,7 +22,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ![Sample Results: Men](figures/portrait_men.png)
 
-### Usage
+### Usage for portrait generation
 1. Clone this repo to local
 ```
 git clone https://github.com/NathanUA/U-2-Net.git
@@ -30,13 +30,13 @@ git clone https://github.com/NathanUA/U-2-Net.git
 
 2. Download the [**u2net_portrait.pth**](https://drive.google.com/file/d/1IG3HdpcRiDoWNookbncQjeaPN28t90yW/view?usp=sharing) model and put it into the directory: ```./saved_models/u2net_portrait/```.
 
-3. Run on the testing set. 
-(1) Download the train and test set from [**APDrawingGAN**](https://github.com/yiranran/APDrawingGAN). These images and their ground truth are stitched side-by-side (512x1024). You need to split each of these images into two 512x512 images and put them into ```./test_data/test_portrait_images/portrait_im/```. You can also download the split testing set on [GoogleDrive](https://drive.google.com/file/d/1NkTsDDN8VO-JVik6VxXyV-3l2eo29KCk/view?usp=sharing). 
-(2) Running the inference with command ```python u2net_portrait_test.py``` will ouptut the results into ```./test_data/test_portrait_images/portrait_results```. 
+3. Run on the testing set. <br/>
+(1) Download the train and test set from [**APDrawingGAN**](https://github.com/yiranran/APDrawingGAN). These images and their ground truth are stitched side-by-side (512x1024). You need to split each of these images into two 512x512 images and put them into ```./test_data/test_portrait_images/portrait_im/```. You can also download the split testing set on [GoogleDrive](https://drive.google.com/file/d/1NkTsDDN8VO-JVik6VxXyV-3l2eo29KCk/view?usp=sharing). <br/>
+(2) Running the inference with command ```python u2net_portrait_test.py``` will ouptut the results into ```./test_data/test_portrait_images/portrait_results```. <br/>
 
-4. Run on your own dataset. 
-(1) Prepare your images and put them into ```./test_data/test_portrait_images/your_portrait_im/```. Large resolution images (larger than 512x512 images are suggested). 
-(2) Run the prediction by command ```python u2net_portrait_demo.py``` will outputs the results to ```./test_data/test_portrait_images/your_portrait_results/```.
+4. Run on your own dataset. <br/>
+(1) Prepare your images and put them into ```./test_data/test_portrait_images/your_portrait_im/```. Large resolution images (larger than 512x512 images are suggested). <br/>
+(2) Run the prediction by command ```python u2net_portrait_demo.py``` will outputs the results to ```./test_data/test_portrait_images/your_portrait_results/```. <br/>
 (3) The difference between ```python u2net_portrait_demo.py``` and ```python u2net_portrait_test.py``` is that we added a simple [**face detection**](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html) step before the portrait generation in ```u2net_portrait_demo.py```.  Because the testing set of APDrawingGAN are normalized and cropped to 512x512 for including only heads of humans, while our own dataset may varies with different resolutions and contents. Therefore, the code ```python u2net_portrait_demo.py``` will detect the biggest face from the given image and then crop, pad and resize the ROI to 512x512 for feeding to the network.
 
 **(2020-Sep-13)** Our U^2-Net based model is the **6th** in [**MICCAI 2020 Thyroid Nodule Segmentation Challenge**](https://tn-scui2020.grand-challenge.org/Resultannouncement/).
@@ -65,7 +65,7 @@ PyTorch 0.4.0
 torchvision 0.2.1  
 glob  
 
-## Usage
+## Usage for salient object detection
 1. Clone this repo
 ```
 git clone https://github.com/NathanUA/U-2-Net.git
