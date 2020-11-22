@@ -14,7 +14,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-**(2020-Nov-21)** We found a interesting application of U^2-Net for [**human protrait drawing**](https://www.pythonf.cn/read/141098). Therefore, we trained another model for this task based on the [**APDrawingGAN dataset**](https://github.com/yiranran/APDrawingGAN).
+**(2020-Nov-21)** Recently, we found an interesting application of U^2-Net for [**human protrait drawing**](https://www.pythonf.cn/read/141098). Therefore, we trained another model for this task based on the [**APDrawingGAN dataset**](https://github.com/yiranran/APDrawingGAN).
 
 ![Sample Results: Kids](figures/portrait_kids.png)
 
