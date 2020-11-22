@@ -35,7 +35,7 @@ git clone https://github.com/NathanUA/U-2-Net.git
 (2) Running the inference with command ```python u2net_portrait_test.py``` will ouptut the results into ```./test_data/test_portrait_images/portrait_results```. <br/>
 
 4. Run on your own dataset. <br/>
-(1) Prepare your images and put them into ```./test_data/test_portrait_images/your_portrait_im/```. Large resolution images (larger than 512x512 images are suggested). <br/>
+(1) Prepare your images and put them into ```./test_data/test_portrait_images/your_portrait_im/```. **To obtain enough details of the protrait, human head region in the input image should be close to or larger than 512x512. The head background should be relatively clear.** <br/>
 (2) Run the prediction by command ```python u2net_portrait_demo.py``` will outputs the results to ```./test_data/test_portrait_images/your_portrait_results/```. <br/>
 (3) The difference between ```python u2net_portrait_demo.py``` and ```python u2net_portrait_test.py``` is that we added a simple [**face detection**](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html) step before the portrait generation in ```u2net_portrait_demo.py```.  Because the testing set of APDrawingGAN are normalized and cropped to 512x512 for including only heads of humans, while our own dataset may varies with different resolutions and contents. Therefore, the code ```python u2net_portrait_demo.py``` will detect the biggest face from the given image and then crop, pad and resize the ROI to 512x512 for feeding to the network.
 
