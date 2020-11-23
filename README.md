@@ -1,6 +1,6 @@
 # U^2-Net (U square net)
 
-The code for our newly accepted paper **U^2-Net (U square net)** in Pattern Recognition 2020:
+The code for our paper **U^2-Net (U square net)** published in Pattern Recognition 2020:
 ## [U^2-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://arxiv.org/pdf/2005.09007.pdf)
 
 [Xuebin Qin](https://webdocs.cs.ualberta.ca/~xuebin/), <br/>
@@ -14,7 +14,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-**(2020-Nov-21)** Recently, we found an interesting application of U^2-Net for [**human protrait drawing**](https://www.pythonf.cn/read/141098). Therefore, we trained another model for this task based on the [**APDrawingGAN dataset**](https://github.com/yiranran/APDrawingGAN).
+**(2020-Nov-21)** Recently, we found an interesting application of U^2-Net for [**human portrait drawing**](https://www.pythonf.cn/read/141098). Therefore, we trained another model for this task based on the [**APDrawingGAN dataset**](https://github.com/yiranran/APDrawingGAN).
 
 ![Sample Results: Kids](figures/portrait_kids.png)
 
@@ -37,7 +37,7 @@ git clone https://github.com/NathanUA/U-2-Net.git
 4. Run on your own dataset. <br/>
 (1) Prepare your images and put them into ```./test_data/test_portrait_images/your_portrait_im/```. **To obtain enough details of the protrait, human head region in the input image should be close to or larger than 512x512. The head background should be relatively clear.** <br/>
 (2) Run the prediction by command ```python u2net_portrait_demo.py``` will outputs the results to ```./test_data/test_portrait_images/your_portrait_results/```. <br/>
-(3) The difference between ```python u2net_portrait_demo.py``` and ```python u2net_portrait_test.py``` is that we added a simple [**face detection**](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html) step before the portrait generation in ```u2net_portrait_demo.py```.  Because the testing set of APDrawingGAN are normalized and cropped to 512x512 for including only heads of humans, while our own dataset may varies with different resolutions and contents. Therefore, the code ```python u2net_portrait_demo.py``` will detect the biggest face from the given image and then crop, pad and resize the ROI to 512x512 for feeding to the network. The folllowing figure shows how to take your own photos for generating high quality portraits.
+(3) The difference between ```python u2net_portrait_demo.py``` and ```python u2net_portrait_test.py``` is that we added a simple [**face detection**](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html) step before the portrait generation in ```u2net_portrait_demo.py```.  Because the testing set of APDrawingGAN are normalized and cropped to 512x512 for including only heads of humans, while our own dataset may varies with different resolutions and contents. Therefore, the code ```python u2net_portrait_demo.py``` will detect the biggest face from the given image and then crop, pad and resize the ROI to 512x512 for feeding to the network. The following figure shows how to take your own photos for generating high quality portraits.
 
 ![Photo layout](figures/xuebin-demo.png)
 
