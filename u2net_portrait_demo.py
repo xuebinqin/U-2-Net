@@ -39,26 +39,34 @@ def crop_face(img, face):
 
     # crop the face with a bigger bbox
     hmw = h - w
-    hpad = int(h/2)+1
-    wpad = int(w/2)+1
+    # hpad = int(h/2)+1
+    # wpad = int(w/2)+1
 
     l,r,t,b = 0,0,0,0
-    left = x-wpad
+    lpad = int(float(w)*0.4)
+    left = x-lpad
     if(left<0):
+        l = lpad-x
         left = 0
-        l = wpad-x
-    right = x+w+wpad
+
+    rpad = int(float(w)*0.4)
+    right = x+w+rpad
     if(right>width):
-        right = width
         r = right-width
-    top = y - hpad
+        right = width
+
+    tpad = int(float(h)*0.6)
+    top = y - tpad
     if(top<0):
+        t = tpad-y
         top = 0
-        t = hpad-y
-    bottom = y+h+int(hpad*0.5)
+
+    bpad  = int(float(h)*0.2)
+    bottom = y+h+bpad
     if(bottom>height):
-        bottom = height
         b = bottom-height
+        bottom = height
+
 
     im_face = img[top:bottom,left:right]
     if(len(im_face.shape)==2):
