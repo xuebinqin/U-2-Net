@@ -169,7 +169,7 @@ def main():
         im_portrait = inference(net,im_face)
 
         # save the output
-        cv2.imwrite(out_dir+"/"+im_list[i].split('/')[-1][0:-4]+'.png',(im_portrait*255).astype(np.uint8))
+        cv2.imwrite(os.path.join(out_dir,im_list[i].split(os.sep)[-1][0:-4]+'.png'),(im_portrait*255).astype(np.uint8))
 
 if __name__ == '__main__':
     main()
