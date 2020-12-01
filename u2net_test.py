@@ -101,8 +101,9 @@ def main():
             inputs_test = Variable(inputs_test.cuda())
         else:
             inputs_test = Variable(inputs_test)
-
-        d1,d2,d3,d4,d5,d6,d7= net(inputs_test)
+        
+        with torch.no_grad():
+            d1,d2,d3,d4,d5,d6,d7= net(inputs_test)
 
         # normalization
         pred = d1[:,0,:,:]
