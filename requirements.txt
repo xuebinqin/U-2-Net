@@ -1,0 +1,4 @@
+numpy==1.16.0
+scikit-image==0.17.2
+pillow==7.2.0
+opencv-python==3.4.2.17
