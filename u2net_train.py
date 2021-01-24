@@ -1,3 +1,4 @@
+import os
 import torch
 import torchvision
 from torch.autograd import Variable
