@@ -14,6 +14,13 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+**(2021-Feb-06)** Since some people raised the issue of human segmentation using U^2-Net, we trained another model for human segemntation based on [**Supervisely Person Dataset**](https://supervise.ly/explore/projects/supervisely-person-dataset-23304/datasets). To run the human segmentation model, please first downlowd the [**u2net_human_seg.pth**](https://drive.google.com/file/d/1-Yg0cxgrNhHP-016FPdp902BR-kSsA4P/view?usp=sharing) model weights and start the inference by command: ```python u2net_human_seg_test.py```. <br/>
+[**Notes: Due to the labeling accuracy of the Supervisely Person Dataset, the human segmentation model here won't give you hair level accuracy. But it should be more robust than u2net trained with DUTS-TR dataset on human segmentation task. It can be used for human portrait segmentation, human body segmentation, etc.**](https://github.com/NathanUA/U-2-Net)<br/>
+
+![Human Image Segmentation](figures/human_seg)
+![Human Video](figures/human_seg_video.gif)
+![Human Video Results](figures/human_seg_results.gif)
+
 **(2020-Dec-28)** Some interesting applications and useful tools based on U^2-Net: <br/>
 (1) [**Xiaolong Liu**](https://github.com/LiuXiaolong19920720) developed several very interesting applications based on U^2-Net including [**Human Portrait Drawing**](https://www.cvpy.net/studio/cv/func/DeepLearning/sketch/sketch/page/)(As far as I know, Xiaolong is the first one who uses U^2-Net for portrait generation), [**image matting**](https://www.cvpy.net/studio/cv/func/DeepLearning/matting/matting/page/) and [**so on**](https://www.cvpy.net/). <br/>
 (2) [**Vladimir Seregin**](https://github.com/peko/nn-lineart) developed an interesting tool, [**NN based lineart**](https://peko.github.io/nn-lineart/), for comparing the portrait results of U^2-Net and that of another popular model, [**ArtLine**](https://github.com/vijishmadhavan/ArtLine), developed by [**Vijish Madhavan**](https://github.com/vijishmadhavan). <br/>
