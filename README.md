@@ -14,6 +14,10 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+**(2021-Apr-18)** Thanks [**Andrea Scuderi**](https://www.linkedin.com/in/andreascuderi/) for releasing his App [**Clipping Camera**](https://apps.apple.com/us/app/clipping-camera/id1548192169?ign-mpt=uo%3D2), which is an U^2-Net driven realtime camera app and "able to detect relevant object from the scene and clip them to apply fancy filters". 
+
+![Clipping Camera APP](figures/clipping_camera.png)
+
 **(2021-Mar-17)** [**Dennis Bappert**](https://github.com/dennisbappert) re-trained the U^2-Net model for [**human portrait matting**](https://github.com/dennisbappert/u-2-net-portrait). The results look very promising and he also provided the details of the training process and data generation(and augmentation) strategy, which are inspiring.
 
 **(2021-Mar-11)** Dr. Tim developed a [**video version rembg**](https://github.com/ecsplendid/rembg-greenscreen) for removing video backgrounds using U^2-Net. The awesome demo results can be found on [**YouTube**](https://www.youtube.com/watch?v=4NjqR2vCV_k).
