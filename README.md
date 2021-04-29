@@ -16,7 +16,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 **(2021-Apr-29)** Thanks [**Jonathan Benavides Vallejo**](https://www.linkedin.com/in/jonathanbv/) for releasing his App [**LensOCR: Extract Text & Image**](https://apps.apple.com/ch/app/lensocr-extract-text-image/id1549961729?l=en&mt=12), which uses U^2-Net for extracting the image foreground.
 
-![LensOCR APP](figures/LensOCR.png)
+![LensOCR APP](figures/LensOCR.PNG)
 
 **(2021-Apr-18)** Thanks [**Andrea Scuderi**](https://www.linkedin.com/in/andreascuderi/) for releasing his App [**Clipping Camera**](https://apps.apple.com/us/app/clipping-camera/id1548192169?ign-mpt=uo%3D2), which is an U^2-Net driven realtime camera app and "is able to detect relevant object from the scene and clip them to apply fancy filters". 
 
