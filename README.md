@@ -12,6 +12,18 @@ The code for our paper **U^2-Net (U square net)** published in Pattern Recogniti
 
 __Contact__: xuebin[at]ualberta[dot]ca
 
+## Citation
+```
+@InProceedings{Qin_2020_PR,
+title = {U2-Net: Going Deeper with Nested U-Structure for Salient Object Detection},
+author = {Qin, Xuebin and Zhang, Zichen and Huang, Chenyang and Dehghan, Masood and Zaiane, Osmar and Jagersand, Martin},
+journal = {Pattern Recognition},
+volume = {106},
+pages = {107404},
+year = {2020}
+}
+```
+
 ## Updates !!!
 
 **(2021-Apr-29)** Thanks [**Jonathan Benavides Vallejo**](https://www.linkedin.com/in/jonathanbv/) for releasing his App [**LensOCR: Extract Text & Image**](https://apps.apple.com/ch/app/lensocr-extract-text-image/id1549961729?l=en&mt=12), which uses U^2-Net for extracting the image foreground.
@@ -126,16 +138,3 @@ or ```python u2net_test.py``` respectively. The 'model_name' in both files can b
 ## Qualitative Comparison
 
 ![Qualitative Comparison](figures/qual.png?raw=true)
-
-
-## Citation
-```
-@InProceedings{Qin_2020_PR,
-title = {U2-Net: Going Deeper with Nested U-Structure for Salient Object Detection},
-author = {Qin, Xuebin and Zhang, Zichen and Huang, Chenyang and Dehghan, Masood and Zaiane, Osmar and Jagersand, Martin},
-journal = {Pattern Recognition},
-volume = {106},
-pages = {107404},
-year = {2020}
-}
-```
