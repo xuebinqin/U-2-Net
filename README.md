@@ -1,8 +1,10 @@
 <p align="center">
   <img width="320" height="320" src="figures/U2Net_Logo.png">
 </p>
+<p align="center">
+    # U<sup>2</sup>-Net (U square net)
+</p>
 
-# U<sup>2</sup>-Net (U square net)
 
 The code for our paper **U<sup>2</sup>-Net (U square net)** published in Pattern Recognition 2020:
 ## [U<sup>2</sup>-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://arxiv.org/pdf/2005.09007.pdf)
