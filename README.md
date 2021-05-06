@@ -1,11 +1,11 @@
 <p align="center">
   <img width="320" height="320" src="figures/U2Net_Logo.png">
   
-  <h1 align="center">U<sup>2</sup>-Net (U Square Net)</h1>
+  <h1 align="center">U<sup>2</sup>-Net: U Square Net</h1>
     
 </p>
 
-The official repo for our paper **U<sup>2</sup>-Net: U square net** published in Pattern Recognition 2020:
+The official repo for our paper **U<sup>2</sup>-Net(U square net)** published in Pattern Recognition 2020:
 
 ## [U<sup>2</sup>-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://arxiv.org/pdf/2005.09007.pdf)
 [Xuebin Qin](https://webdocs.cs.ualberta.ca/~xuebin/), [Zichen Zhang](https://webdocs.cs.ualberta.ca/~zichen2/), [Chenyang Huang](https://chenyangh.com/), [Masood Dehghan](https://sites.google.com/view/masooddehghan), [Osmar R. Zaiane](http://webdocs.cs.ualberta.ca/~zaiane/) and [Martin Jagersand](https://webdocs.cs.ualberta.ca/~jag/)
