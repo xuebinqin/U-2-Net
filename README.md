@@ -1,3 +1,6 @@
+![U2Net Logo](figures/U2Net_Logo.png)
+
+
 # U<sup>2</sup>-Net (U square net)
 
 The code for our paper **U<sup>2</sup>-Net (U square net)** published in Pattern Recognition 2020:
