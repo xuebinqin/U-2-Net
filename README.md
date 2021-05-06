@@ -3,31 +3,14 @@
   
   <h1 align="center">U<sup>2</sup>-Net (U Square Net)</h1>
   
+  <h2 align="center">## [U<sup>2</sup>-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://arxiv.org/pdf/2005.09007.pdf)<h2>
+  <p align="center">[Xuebin Qin](https://webdocs.cs.ualberta.ca/~xuebin/), [Zichen Zhang](https://webdocs.cs.ualberta.ca/~zichen2/), [Chenyang Huang](https://chenyangh.com/), [Masood Dehghan](https://sites.google.com/view/masooddehghan), [Osmar R. Zaiane](http://webdocs.cs.ualberta.ca/~zaiane/) and [Martin Jagersand](https://webdocs.cs.ualberta.ca/~jag/)</p>
+    
 </p>
 
-The code for our paper **U<sup>2</sup>-Net (U square net)** published in Pattern Recognition 2020:
-## [U<sup>2</sup>-Net: Going Deeper with Nested U-Structure for Salient Object Detection](https://arxiv.org/pdf/2005.09007.pdf)
-
-[Xuebin Qin](https://webdocs.cs.ualberta.ca/~xuebin/), <br/>
-[Zichen Zhang](https://webdocs.cs.ualberta.ca/~zichen2/), <br/>
-[Chenyang Huang](https://chenyangh.com/), <br/>
-[Masood Dehghan](https://sites.google.com/view/masooddehghan), <br/>
-[Osmar R. Zaiane](http://webdocs.cs.ualberta.ca/~zaiane/) and <br/>
-[Martin Jagersand](https://webdocs.cs.ualberta.ca/~jag/).
+The official repo for our paper **U<sup>2</sup>-Net (U square net)** published in Pattern Recognition 2020:
 
 __Contact__: xuebin[at]ualberta[dot]ca
-
-## Citation
-```
-@InProceedings{Qin_2020_PR,
-title = {U2-Net: Going Deeper with Nested U-Structure for Salient Object Detection},
-author = {Qin, Xuebin and Zhang, Zichen and Huang, Chenyang and Dehghan, Masood and Zaiane, Osmar and Jagersand, Martin},
-journal = {Pattern Recognition},
-volume = {106},
-pages = {107404},
-year = {2020}
-}
-```
 
 ## Updates !!!
 
@@ -145,3 +128,15 @@ or ```python u2net_test.py``` respectively. The 'model_name' in both files can b
 ## Qualitative Comparison
 
 ![Qualitative Comparison](figures/qual.png?raw=true)
+
+## Citation
+```
+@InProceedings{Qin_2020_PR,
+title = {U2-Net: Going Deeper with Nested U-Structure for Salient Object Detection},
+author = {Qin, Xuebin and Zhang, Zichen and Huang, Chenyang and Dehghan, Masood and Zaiane, Osmar and Jagersand, Martin},
+journal = {Pattern Recognition},
+volume = {106},
+pages = {107404},
+year = {2020}
+}
+```
