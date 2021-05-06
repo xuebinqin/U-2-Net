@@ -16,7 +16,10 @@ __Contact__: xuebin[at]ualberta[dot]ca
 ## Updates !!!
 
 **(2021-May-5)** Thank [**AK391**](https://github.com/AK391) for sharing his [**Gradio Web Demo of U<sup>2</sup>-Net**](https://gradio.app/hub/AK391/U-2-Net).
-![gradio_web_demo.jpg](figures/gradio_web_demo.jpg)
+
+<p align="center">
+  <img width="400" height="410" src="figures/gradio_web_demo.jpg"> 
+</p>
 
 **(2021-Apr-29)** Thanks [**Jonathan Benavides Vallejo**](https://www.linkedin.com/in/jonathanbv/) for releasing his App [**LensOCR: Extract Text & Image**](https://apps.apple.com/ch/app/lensocr-extract-text-image/id1549961729?l=en&mt=12), which uses U<sup>2</sup>-Net for extracting the image foreground.
 
