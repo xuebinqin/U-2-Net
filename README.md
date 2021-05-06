@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="160" height="160" src="figures/U2Net_Logo.png">
+  <img width="320" height="320" src="figures/U2Net_Logo.png">
 </p>
 
 # U<sup>2</sup>-Net (U square net)
