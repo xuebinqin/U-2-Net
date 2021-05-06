@@ -26,7 +26,7 @@ year = {2020}
 
 ## Updates !!!
 
-**(2021-May-5)** [**Gradio Web Demo**](https://gradio.app/hub/AK391/U-2-Net)
+**(2021-May-5)** Thank AK391 for providing the [**Gradio Web Demo of U<sup>2</sup>-Net**](https://gradio.app/hub/AK391/U-2-Net)
 
 **(2021-Apr-29)** Thanks [**Jonathan Benavides Vallejo**](https://www.linkedin.com/in/jonathanbv/) for releasing his App [**LensOCR: Extract Text & Image**](https://apps.apple.com/ch/app/lensocr-extract-text-image/id1549961729?l=en&mt=12), which uses U^2-Net for extracting the image foreground.
 
