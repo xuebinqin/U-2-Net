@@ -18,7 +18,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 **(2021-May-5)** Thank [**AK391**](https://github.com/AK391) for sharing his [**Gradio Web Demo of U<sup>2</sup>-Net**](https://gradio.app/hub/AK391/U-2-Net).
 
 <p align="center">
-  <img width="800" height="825" src="gradio_web_demo.jpg">
+  <img width="800" height="825" src="figures/gradio_web_demo.jpg">
 </p>
 
 
