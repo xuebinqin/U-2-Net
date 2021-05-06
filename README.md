@@ -2,7 +2,7 @@
   <img width="320" height="320" src="figures/U2Net_Logo.png">
 </p>
 
-# U<sup>2</sup>-Net (U square net)
+# U<sup>2</sup>-Net (U Square Net)
 
 
 
