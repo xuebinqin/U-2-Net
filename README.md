@@ -15,6 +15,10 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+**(2021-July-16)** A new background removal webapp developed by Изатоп Василий. 
+
+![rm_bg](figures/rm_bg.JPG)
+
 **(2021-May-26)** Thank [**Dang Quoc Quy**](https://github.com/quyvsquy) for his [**Art Transfer APP**](https://play.google.com/store/apps/details?id=com.quyvsquy.arttransfer) built upon U<sup>2</sup>-Net.
 
 ![art_transfer](figures/art_transfer.JPG)
