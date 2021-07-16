@@ -15,7 +15,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-**(2021-July-16)** A new background removal webapp developed by Изатоп Василий. 
+**(2021-July-16)** A new [background removal webapp](https://remove-background.net/) developed by Изатоп Василий. 
 
 ![rm_bg](figures/rm_bg.JPG)
 
