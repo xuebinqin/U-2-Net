@@ -1,25 +1,22 @@
 import os
 from skimage import io, transform
 import torch
-import torchvision
 from torch.autograd import Variable
-import torch.nn as nn
-import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms#, utils
-# import torch.optim as optim
+from torchvision import transforms
 
 import numpy as np
 from PIL import Image
 import glob
 
 from data_loader import RescaleT
-from data_loader import ToTensor
 from data_loader import ToTensorLab
 from data_loader import SalObjDataset
 
-from model import U2NET # full size version 173.6 MB
-from model import U2NETP # small version u2net 4.7 MB
+from model import U2NET
+from model import U2NETP
+import cv2
+
 
 # normalize the predicted SOD probability map
 def normPRED(d):
@@ -30,18 +27,16 @@ def normPRED(d):
 
     return dn
 
+
 def save_output(image_name,pred,d_dir):
 
     predict = pred
     predict = predict.squeeze()
     predict_np = predict.cpu().data.numpy()
-
     im = Image.fromarray(predict_np*255).convert('RGB')
     img_name = image_name.split(os.sep)[-1]
     image = io.imread(image_name)
-    imo = im.resize((image.shape[1],image.shape[0]),resample=Image.BILINEAR)
-
-    pb_np = np.array(imo)
+    imo = im.resize((image.shape[1], image.shape[0]), resample=Image.BILINEAR)
 
     aaa = img_name.split(".")
     bbb = aaa[0:-1]
@@ -49,26 +44,46 @@ def save_output(image_name,pred,d_dir):
     for i in range(1,len(bbb)):
         imidx = imidx + "." + bbb[i]
 
-    imo.save(d_dir+imidx+'.png')
+    mask_save_dir = os.path.join(d_dir, "mask_results"+os.sep)
+    if not os.path.exists(mask_save_dir):
+        os.makedirs(mask_save_dir, exist_ok=True)
+    imo.save(mask_save_dir+imidx+'.png')
+
+
+# 根据mask输出获取前置图像
+def save_front_image(image_name, prediction_dir):
+    img1 = cv2.imread(image_name)
+    img_name = image_name.split(os.sep)[-1]
+    indexes = img_name.split(".")[0:-1]
+    imidx = indexes[0]
+    for i in range(1, len(indexes)):
+        imidx = imidx + "." + indexes[i]
+    mask_image_path = os.path.join(prediction_dir, "mask_results"+os.sep, imidx+'.png')
+    img2 = cv2.imread(mask_image_path, cv2.IMREAD_GRAYSCALE)
+    h, w, c = img1.shape
+    img3 = np.zeros((h, w, 4))
+    img3[:, :, 0:3] = img1
+    img3[:, :, 3] = img2
+    front_save_dir = os.path.join(prediction_dir, "front_results"+os.sep)
+    if not os.path.exists(front_save_dir):
+        os.makedirs(front_save_dir, exist_ok=True)
+    cv2.imwrite(front_save_dir+imidx+'.png', img3)
+
 
 def main():
 
     # --------- 1. get image path and name ---------
     model_name='u2net'#u2netp
-
-
-
     image_dir = os.path.join(os.getcwd(), 'test_data', 'test_images')
     prediction_dir = os.path.join(os.getcwd(), 'test_data', model_name + '_results' + os.sep)
     model_dir = os.path.join(os.getcwd(), 'saved_models', model_name, model_name + '.pth')
-
     img_name_list = glob.glob(image_dir + os.sep + '*')
     print(img_name_list)
 
     # --------- 2. dataloader ---------
-    #1. dataloader
-    test_salobj_dataset = SalObjDataset(img_name_list = img_name_list,
-                                        lbl_name_list = [],
+    # 1. dataloader
+    test_salobj_dataset = SalObjDataset(img_name_list=img_name_list,
+                                        lbl_name_list=[],
                                         transform=transforms.Compose([RescaleT(320),
                                                                       ToTensorLab(flag=0)])
                                         )
@@ -114,9 +129,11 @@ def main():
         # save results to test_results folder
         if not os.path.exists(prediction_dir):
             os.makedirs(prediction_dir, exist_ok=True)
-        save_output(img_name_list[i_test],pred,prediction_dir)
+        save_output(img_name_list[i_test], pred, prediction_dir)
+        save_front_image(img_name_list[i_test], prediction_dir)
 
-        del d1,d2,d3,d4,d5,d6,d7
+        del d1, d2, d3, d4, d5, d6, d7
+
 
 if __name__ == "__main__":
     main()
