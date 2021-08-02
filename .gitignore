@@ -141,3 +141,4 @@ cython_debug/
 saved_models/u2net
 saved_models/u2netp
 .idea
+test_data
