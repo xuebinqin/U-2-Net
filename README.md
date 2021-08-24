@@ -25,7 +25,7 @@ python u2net_portrait_composite.py -s 20 -a 0.5
 ```
 ,where ``-s`` indicates the sigmoid of gaussian function for blurring the orignal image and ``-a`` denotes the alpha weights of the orignal image when fusing them. 
 
-![im_portrait_composite](figures/im_composite.jpg')
+![im_portrait_composite](figures/im_composite.jpg)
 
 **(2021-July-16)** A new [background removal webapp](https://remove-background.net/) developed by Изатоп Василий. 
 
