@@ -19,7 +19,8 @@ __Contact__: xuebin[at]ualberta[dot]ca
 ```
 git clone https://github.com/NathanUA/U-2-Net.git
 ```
-, (2) Download the u2net_portrait.pth from [**GoogleDrive**](https://drive.google.com/file/d/1IG3HdpcRiDoWNookbncQjeaPN28t90yW/view?usp=sharing) or [**Baidu Pan(提取码：chgd)**](https://pan.baidu.com/s/1BYT5Ts6BxwpB8_l2sAyCkw)model and put it into the directory: ```./saved_models/u2net_portrait/```, (3) run the code by command 
+(2) Download the u2net_portrait.pth from [**GoogleDrive**](https://drive.google.com/file/d/1IG3HdpcRiDoWNookbncQjeaPN28t90yW/view?usp=sharing) or [**Baidu Pan(提取码：chgd)**](https://pan.baidu.com/s/1BYT5Ts6BxwpB8_l2sAyCkw)model and put it into the directory: ```./saved_models/u2net_portrait/```, 
+(3) run the code by command 
 ```
 python u2net_portrait_composite.py -s 20 -a 0.5
 ```
