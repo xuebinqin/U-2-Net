@@ -15,7 +15,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-**(2021-Aug-24)** We play a bit more about fusing the orignal image and the generated portraits to composite different styles. You can <br/> 
+**(2021-Aug-24)** We played a bit more about fusing the orignal image and the generated portraits to composite different styles. You can <br/> 
 (1) Download this repo by
 ```
 git clone https://github.com/NathanUA/U-2-Net.git
