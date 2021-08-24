@@ -15,16 +15,16 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-**(2021-Aug-24)** We play a bit more about fusing the orignal image and the generated portraits to composite different styles. You can (1) download this repo by:
+**(2021-Aug-24)** We play a bit more about fusing the orignal image and the generated portraits to composite different styles. You can <br/> (1) Download this repo by:
 ```
 git clone https://github.com/NathanUA/U-2-Net.git
-```
-(2) Download the u2net_portrait.pth from [**GoogleDrive**](https://drive.google.com/file/d/1IG3HdpcRiDoWNookbncQjeaPN28t90yW/view?usp=sharing) or [**Baidu Pan(提取码：chgd)**](https://pan.baidu.com/s/1BYT5Ts6BxwpB8_l2sAyCkw)model and put it into the directory: ```./saved_models/u2net_portrait/```, 
+```, <br/>
+(2) Download the u2net_portrait.pth from [**GoogleDrive**](https://drive.google.com/file/d/1IG3HdpcRiDoWNookbncQjeaPN28t90yW/view?usp=sharing) or [**Baidu Pan(提取码：chgd)**](https://pan.baidu.com/s/1BYT5Ts6BxwpB8_l2sAyCkw)model and put it into the directory: ```./saved_models/u2net_portrait/```, <br/>
 (3) run the code by command 
 ```
 python u2net_portrait_composite.py -s 20 -a 0.5
 ```
-,where ``-s`` indicates the sigmoid of gaussian function for blurring the orignal image and ``-a`` denotes the alpha weights of the orignal image when fusing them. 
+,where ``-s`` indicates the sigmoid of gaussian function for blurring the orignal image and ``-a`` denotes the alpha weights of the orignal image when fusing them. <br/>
 
 ![im_portrait_composite](figures/im_composite.jpg)
 
