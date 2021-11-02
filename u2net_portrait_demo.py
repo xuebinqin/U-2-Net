@@ -157,19 +157,19 @@ def main():
     net.eval()
 
     # do the inference one-by-one
-    for i in range(0,len(im_list)):
+    for i, im in enumerate(im_list):
         print("--------------------------")
-        print("inferencing ", i, "/", len(im_list), im_list[i])
+        print("inferencing ", i, "/", len(im_list), im)
 
         # load each image
-        img = cv2.imread(im_list[i])
+        img = cv2.imread(im)
         height,width = img.shape[0:2]
         face = detect_single_face(face_cascade,img)
         im_face = crop_face(img, face)
         im_portrait = inference(net,im_face)
 
         # save the output
-        cv2.imwrite(out_dir+"/"+im_list[i].split('/')[-1][0:-4]+'.png',(im_portrait*255).astype(np.uint8))
+        cv2.imwrite(out_dir+"/"+im.split('/')[-1][0:-4]+'.png',(im_portrait*255).astype(np.uint8))
 
 if __name__ == '__main__':
     main()
