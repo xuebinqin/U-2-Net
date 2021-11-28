@@ -15,6 +15,14 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+**(2021-Nov-28)** Interesting Sky Segmentation models developed by [**xiongzhu**](https://github.com/xiongzhu666/Sky-Segmentation-and-Post-processing) using U<sup>2</sup>-Net. 
+
+![im_sky_segmentation](figures/sky-seg.png)
+
+**(2021-Nov-28)** Awesome image editing app [**Pixelmator pro**](https://www.pixelmator.com/pro/) uses U<sup>2</sup>-Net as its one of the background removal models. 
+
+![im_sky_segmentation](figures/pixelmator.jpg)
+
 **(2021-Aug-24)** We played a bit more about fusing the orignal image and the generated portraits to composite different styles. You can <br/> 
 (1) Download this repo by
 ```
