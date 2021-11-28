@@ -19,7 +19,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ![im_sky_segmentation](figures/sky-seg.png)
 
-**(2021-Nov-28)** Awesome image editing app [**Pixelmator pro**](https://www.pixelmator.com/pro/) uses U<sup>2</sup>-Net as its one of the background removal models. 
+**(2021-Nov-28)** Awesome image editing app [**Pixelmator pro**](https://www.pixelmator.com/pro/) uses U<sup>2</sup>-Net as one of its background removal models. 
 
 ![im_sky_segmentation](figures/pixelmator.jpg)
 
