@@ -127,8 +127,7 @@ class ToTensor(object):
 
 		tmpLbl[:,:,0] = label[:,:,0]
 
-		# change the r,g,b to b,r,g from [0,255] to [0,1]
-		#transforms.Normalize(mean = (0.485, 0.456, 0.406), std = (0.229, 0.224, 0.225))
+
 		tmpImg = tmpImg.transpose((2, 0, 1))
 		tmpLbl = label.transpose((2, 0, 1))
 
@@ -215,8 +214,7 @@ class ToTensorLab(object):
 
 		tmpLbl[:,:,0] = label[:,:,0]
 
-		# change the r,g,b to b,r,g from [0,255] to [0,1]
-		#transforms.Normalize(mean = (0.485, 0.456, 0.406), std = (0.229, 0.224, 0.225))
+
 		tmpImg = tmpImg.transpose((2, 0, 1))
 		tmpLbl = label.transpose((2, 0, 1))
 
