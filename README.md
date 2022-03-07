@@ -15,8 +15,8 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-## (2022-Mar-3) Our [**new work**](https://xuebinqin.github.io/dis/index.html) is on the way. Please be aware of our updates.
-![ship-demo](figures/ship-demo.gif)
+<!-- ## (2022-Mar-3) Our [**new work**](https://xuebinqin.github.io/dis/index.html) is on the way. Please be aware of our updates.
+![ship-demo](figures/ship-demo.gif) -->
 
 ** (2022-Mar-3)** Thank [**Renato Violin**](https://github.com/renatoviolin/bg-remove-augment) for providing an awesome webapp for image background removal and replacement based on our U<sup>2</sup>-Net.
 ![bg-rm-aug](figures/bg-rm-aug.gif) 
