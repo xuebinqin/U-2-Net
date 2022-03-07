@@ -15,7 +15,8 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-## (2022-Mar-3) Our new work is on the way. Please be aware of our updates.
+## (2022-Mar-3) Our [**new work**](https://xuebinqin.github.io/dis/index.html) is on the way. Please be aware of our updates.
+![ship-demo](figures/ship-demo.gif)
 
 **(2021-Dec-21)** This [**blog**](https://rockyshikoku.medium.com/u2net-to-coreml-machine-learning-segmentation-on-iphone-eac0c721d67b) clearly describes the way of converting U<sup>2</sup>-Net to [**CoreML**](https://github.com/john-rocky/CoreML-Models) and running it on iphone. 
 
