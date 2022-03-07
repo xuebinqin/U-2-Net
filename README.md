@@ -18,6 +18,9 @@ __Contact__: xuebin[at]ualberta[dot]ca
 ## (2022-Mar-3) Our [**new work**](https://xuebinqin.github.io/dis/index.html) is on the way. Please be aware of our updates.
 ![ship-demo](figures/ship-demo.gif)
 
+## (2022-Mar-3) Thank [**Renato Violin**](https://github.com/renatoviolin/bg-remove-augment) for providing an awesome webapp for image background removal and replacement based on our U<sup>2</sup>-Net.
+![bg-rm-aug](figures/bg-rm-aug.gif) 
+
 **(2021-Dec-21)** This [**blog**](https://rockyshikoku.medium.com/u2net-to-coreml-machine-learning-segmentation-on-iphone-eac0c721d67b) clearly describes the way of converting U<sup>2</sup>-Net to [**CoreML**](https://github.com/john-rocky/CoreML-Models) and running it on iphone. 
 
 **(2021-Nov-28)** Interesting Sky Segmentation models developed by [**xiongzhu**](https://github.com/xiongzhu666/Sky-Segmentation-and-Post-processing) using U<sup>2</sup>-Net. 
