@@ -16,7 +16,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 ## Updates !!!
 
 ** (2022-Mar-10)** Thank [**Doron Adler**](https://github.com/Norod/U-2-Net-StyleTransfer) for training the awesome style transfer U<sup>2</sup>-Net.
-![style-trans](figures/style-trans.jpg) 
+![style-trans](figures/style-trans.JPG) 
 
 ** (2022-Mar-8)** Thank [**Levin Dabhi**](https://github.com/levindabhi/cloth-segmentation) for training the amazing clothes segmentation U<sup>2</sup>-Net.
 ![close-seg](figures/close-seg.jpg) 
