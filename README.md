@@ -15,6 +15,9 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+** (2022-Mar-17)** Thank [**Ezaldeen Sahb**](https://github.com/Ezaldeen99/BackgroundRemoval) for implementing the iOS library for image background removal based on U<sup>2</sup>-Net.
+![close-seg](figures/swift-u2net.jpeg) 
+
 <!-- ** (2022-Mar-10)** Thank [**Doron Adler**](https://github.com/Norod/U-2-Net-StyleTransfer) for training the awesome style transfer U<sup>2</sup>-Net.
 ![style-trans](figures/style-trans.JPG)  -->
 
