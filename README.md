@@ -15,6 +15,9 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+** (2022-Mar-19)** Thank [**Kikedao**](https://silueta.me/) for providing an fantastic webapp based on U<sup>2</sup>-Net.
+![silueta](figures/silueta.png) 
+
 ** (2022-Mar-17)** Thank [**Ezaldeen Sahb**](https://github.com/Ezaldeen99/BackgroundRemoval) for implementing the iOS library for image background removal based on U<sup>2</sup>-Net, which will greatly facilitate the developing of mobile apps.
 ![close-seg](figures/swift-u2net.jpeg) 
 
