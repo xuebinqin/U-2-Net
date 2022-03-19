@@ -15,7 +15,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-** (2022-Mar-19)** Thank [**Kikedao**](https://silueta.me/) for providing the community a fantastic webapp based on U<sup>2</sup>-Net. More details can be found [**https://github.com/xuebinqin/U-2-Net/issues/295**](https://github.com/xuebinqin/U-2-Net/issues/295).
+** (2022-Mar-19)** Thank [**Kikedao**](https://github.com/Kikedao) for providing a fantastic webapp [**Silueta**](https://silueta.me/) based on U<sup>2</sup>-Net. More details can be found [**https://github.com/xuebinqin/U-2-Net/issues/295**](https://github.com/xuebinqin/U-2-Net/issues/295).
 ![silueta](figures/silueta.png) 
 
 ** (2022-Mar-17)** Thank [**Ezaldeen Sahb**](https://github.com/Ezaldeen99/BackgroundRemoval) for implementing the iOS library for image background removal based on U<sup>2</sup>-Net, which will greatly facilitate the developing of mobile apps.
