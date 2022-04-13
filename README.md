@@ -19,6 +19,9 @@ __Contact__: xuebin[at]ualberta[dot]ca
 ** (2022-Apr.-12)** Thank [**Kevin Shah**](https://github.com/ioskevinshah) for providing us a great iOS App [**Lensto**](https://apps.apple.com/in/app/lensto-background-changer/id1574844033), ([**Demo Video**](https://www.youtube.com/shorts/jWwUiKZjfok)), based on U<sup>2</sup>-Net.
 ![lensto](figures/lensto.png)
 
+** (2022-Mar.-31)** Our U<sup>2</sup>-Net model is also integrated by [**Hotpot.ai**](https://hotpot.ai/) for art design.
+![hotpot](figures/hotpot.png)
+
 ** (2022-Mar-19)** Thank [**Kikedao**](https://github.com/Kikedao) for providing a fantastic webapp [**Silueta**](https://silueta.me/) based on U<sup>2</sup>-Net. More details can be found at [**https://github.com/xuebinqin/U-2-Net/issues/295**](https://github.com/xuebinqin/U-2-Net/issues/295).
 ![silueta](figures/silueta.png) 
 
