@@ -15,6 +15,8 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+** (2022-Mar.-31)** Thank [**Hikaru Tsuyumine**] for implementing the iOS App [**Portrait Drawing**](https://apps.apple.com/us/app/portrait-drawing/id1623269600) based on our U<sup>2</sup>-Net based portrait generation model.
+![portrait-ios-app](figures/portrait-ios-app.png)
 
 ** (2022-Apr.-12)** Thank [**Kevin Shah**](https://github.com/ioskevinshah) for providing us a great iOS App [**Lensto**](https://apps.apple.com/in/app/lensto-background-changer/id1574844033), ([**Demo Video**](https://www.youtube.com/shorts/jWwUiKZjfok)), based on U<sup>2</sup>-Net.
 ![lensto](figures/lensto.png)
