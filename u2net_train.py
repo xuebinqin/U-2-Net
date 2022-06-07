@@ -26,7 +26,7 @@ from model import U2NETP
 
 # ------- 1. define loss function --------
 
-bce_loss = nn.BCELoss(size_average=True)
+bce_loss = nn.BCEWithLogitsLoss(size_average=True) # Unstable + producing Errors during autocasting https://discuss.pytorch.org/t/bceloss-are-unsafe-to-autocast/110407
 
 def muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v):
 
@@ -62,6 +62,12 @@ batch_size_train = 12
 batch_size_val = 1
 train_num = 0
 val_num = 0
+
+# Performance Training Guide: https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html
+use_amp = True # Whether to use Mixed Precision or not
+scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+torch.backends.cudnn.benchmark = True
+
 
 tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*' + image_ext)
 
@@ -129,20 +135,25 @@ for epoch in range(0, epoch_num):
 
         # wrap them in Variable
         if torch.cuda.is_available():
-            inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False), Variable(labels.cuda(),
-                                                                                        requires_grad=False)
+            inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False), Variable(labels.cuda(),requires_grad=False)
         else:
             inputs_v, labels_v = Variable(inputs, requires_grad=False), Variable(labels, requires_grad=False)
 
         # y zero the parameter gradients
-        optimizer.zero_grad()
+        optimizer.zero_grad(set_to_none=True) # 
 
         # forward + backward + optimize
-        d0, d1, d2, d3, d4, d5, d6 = net(inputs_v)
-        loss2, loss = muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v)
+        with torch.cuda.amp.autocast(enabled=use_amp): # Use Mixed Precision
+            d0, d1, d2, d3, d4, d5, d6 = net(inputs_v)
+            loss2, loss = muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v)
 
-        loss.backward()
-        optimizer.step()
+        # loss.backward()
+        # optimizer.step()
+
+        scaler.scale(loss).backward() # AMP guide https://pytorch.org/tutorials/recipes/recipes/amp_recipe.html
+        scaler.step(optimizer)
+        scaler.update()
+        optimizer.zero_grad(set_to_none=True) # set_to_none=True here can modestly improve performance
 
         # # print statistics
         running_loss += loss.data.item()
@@ -155,8 +166,15 @@ for epoch in range(0, epoch_num):
         epoch + 1, epoch_num, (i + 1) * batch_size_train, train_num, ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
 
         if ite_num % save_frq == 0:
+            
+            if use_amp:
+                checkpoint = {"model": net.state_dict(),"optimizer": optimizer.state_dict(),"scaler": scaler.state_dict()}
+                torch.save(checkpoint, model_dir + model_name+"_bce_itr_%d_train_%3f_tar_%3f.pth" % (ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
+            
+            else:
+                torch.save(net.state_dict(), model_dir + model_name+"_bce_itr_%d_train_%3f_tar_%3f.pth" % (ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
+    
 
-            torch.save(net.state_dict(), model_dir + model_name+"_bce_itr_%d_train_%3f_tar_%3f.pth" % (ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
             running_loss = 0.0
             running_tar_loss = 0.0
             net.train()  # resume train
