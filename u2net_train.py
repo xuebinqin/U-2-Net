@@ -24,9 +24,12 @@ from data_loader import SalObjDataset
 from model import U2NET
 from model import U2NETP
 
+from focal_loss import FocalLoss
+
 # ------- 1. define loss function --------
 
-bce_loss = nn.BCEWithLogitsLoss(size_average=True) # Unstable + producing Errors during autocasting https://discuss.pytorch.org/t/bceloss-are-unsafe-to-autocast/110407
+# bce_loss = nn.BCEWithLogitsLoss(size_average=True) # BCELoss is Unstable so producing Errors during autocasting https://discuss.pytorch.org/t/bceloss-are-unsafe-to-autocast/110407
+bce_loss = FocalLoss(reduction = 'mean') # same as size_average = True
 
 def muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v):
 
