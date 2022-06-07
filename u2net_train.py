@@ -107,7 +107,7 @@ elif(model_name=='u2netp'):
     net = U2NETP(3,1)
 
 if torch.cuda.is_available():
-    net.cuda()
+    net.to('cuda',memory_format = torch.channels_last)
 
 # ------- 4. define optimizer --------
 print("---define optimizer...")
@@ -135,7 +135,7 @@ for epoch in range(0, epoch_num):
 
         # wrap them in Variable
         if torch.cuda.is_available():
-            inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False), Variable(labels.cuda(),requires_grad=False)
+            inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False, memory_format = torch.channels_last), Variable(labels.cuda(),requires_grad=False, memory_format = torch.channels_last)
         else:
             inputs_v, labels_v = Variable(inputs, requires_grad=False), Variable(labels, requires_grad=False)
 
