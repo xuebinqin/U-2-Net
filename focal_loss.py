@@ -49,7 +49,14 @@ def sigmoid_focal_loss(
 
 
 class FocalLoss(torch.nn.Module):
-    def __init__(self, alpha: float = 0.5, gamma: float = 2, reduction: str = "mean",):
+    def __init__(self, alpha: float = 1, gamma: float = 0, reduction: str = "mean",):
+        '''
+        Focal Loss Implementation. It behaves EXACTLY like BCEWithLogitLoss when gamma == 0and alpha == 1
+        args:
+            alpha: The class "weighing" factor. Responsible to give weight to 1 class more than the other
+            gamma: The balancing factor. Controls the curve and give less attention to correctly classified examples
+            reduction: How to reduct the loss. 'mean' means to get the average of all the elements
+        '''
         super(FocalLoss,self).__init__()
         self.reduction = reduction
         self.alpha = alpha
@@ -58,4 +65,3 @@ class FocalLoss(torch.nn.Module):
     
     def forward(self,inputs: torch.Tensor, targets: torch.Tensor,):
         return sigmoid_focal_loss(inputs, targets, alpha = self.alpha, gamma = self.gamma, reduction = self.reduction)
-
