@@ -19,6 +19,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 ![ship-demo](figures/ship-demo.gif)
 ![bg-removal](figures/bg-removal.gif)
 ![view-move](figures/view-move.gif)
+![motor-demo](figures/motor-demo.gif)
 
 ** (2022-Jun.-3)** Thank [**Adir Kol**](https://github.com/adirkol) for sharing the iOS App [**3D Photo Creator**](https://apps.apple.com/us/app/3d-photo-creator/id1619676262) based on our U<sup>2</sup>-Net.
 ![portrait-ios-app](figures/3d-photo-re.jpg)
