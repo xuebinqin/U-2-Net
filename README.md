@@ -17,6 +17,8 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ** (2022-Jul.-5)** Our new work **Highly Accurate Dichotomous Image Segmentation (DIS) [**Project Page**](https://xuebinqin.github.io/dis/index.html), [**Github**](https://github.com/xuebinqin/DIS) is accepted by ECCV 2022. Our code and dataset will be publicly available no later than July 17th, 2022. Please be aware of our updates. 
 ![ship-demo](figures/ship-demo.gif)
+![bg-removal](figures/bg-removal.gif)
+![view-move](figures/view-move.gif)
 
 ** (2022-Jun.-3)** Thank [**Adir Kol**](https://github.com/adirkol) for sharing the iOS App [**3D Photo Creator**](https://apps.apple.com/us/app/3d-photo-creator/id1619676262) based on our U<sup>2</sup>-Net.
 ![portrait-ios-app](figures/3d-photo-re.jpg)
