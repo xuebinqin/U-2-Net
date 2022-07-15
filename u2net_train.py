@@ -1,32 +1,27 @@
 import os
 import torch
-import torchvision
-from torch.autograd import Variable
-import torch.nn as nn
-import torch.nn.functional as F
 
-from torch.utils.data import Dataset, DataLoader
-from torchvision import transforms, utils
+from torch.utils.data import DataLoader
+from torchvision import transforms
 import torch.optim as optim
-import torchvision.transforms as standard_transforms
 
-import numpy as np
 import glob
 import os
 
-from data_loader import Rescale
 from data_loader import RescaleT
 from data_loader import RandomCrop
-from data_loader import ToTensor
 from data_loader import ToTensorLab
 from data_loader import SalObjDataset
 
 from model import U2NET
 from model import U2NETP
 
+from focal_loss import FocalLoss
+
 # ------- 1. define loss function --------
 
-bce_loss = nn.BCELoss(size_average=True)
+# bce_loss = nn.BCEWithLogitsLoss(size_average=True) # BCELoss is Unstable so producing Errors during autocasting https://discuss.pytorch.org/t/bceloss-are-unsafe-to-autocast/110407
+bce_loss = FocalLoss(reduction = 'mean') # same as size_average = True
 
 def muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v):
 
@@ -58,10 +53,18 @@ label_ext = '.png'
 model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
 
 epoch_num = 100000
-batch_size_train = 12
+batch_size_train = 32
 batch_size_val = 1
 train_num = 0
 val_num = 0
+
+# Performance Training Guide: https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html
+use_amp = True # Whether to use Mixed Precision or not
+scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
+torch.backends.cudnn.benchmark = True
+
+DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
+
 
 tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*' + image_ext)
 
@@ -91,7 +94,7 @@ salobj_dataset = SalObjDataset(
         RescaleT(320),
         RandomCrop(288),
         ToTensorLab(flag=0)]))
-salobj_dataloader = DataLoader(salobj_dataset, batch_size=batch_size_train, shuffle=True, num_workers=1)
+salobj_dataloader = DataLoader(salobj_dataset, batch_size=batch_size_train, shuffle=True, num_workers=2)
 
 # ------- 3. define model --------
 # define the net
@@ -101,7 +104,7 @@ elif(model_name=='u2netp'):
     net = U2NETP(3,1)
 
 if torch.cuda.is_available():
-    net.cuda()
+    net.to('cuda',memory_format = torch.channels_last)
 
 # ------- 4. define optimizer --------
 print("---define optimizer...")
@@ -113,7 +116,7 @@ ite_num = 0
 running_loss = 0.0
 running_tar_loss = 0.0
 ite_num4val = 0
-save_frq = 2000 # save the model every 2000 iterations
+save_frq = 1000 # save the model every 2000 iterations
 
 for epoch in range(0, epoch_num):
     net.train()
@@ -122,27 +125,29 @@ for epoch in range(0, epoch_num):
         ite_num = ite_num + 1
         ite_num4val = ite_num4val + 1
 
-        inputs, labels = data['image'], data['label']
-
-        inputs = inputs.type(torch.FloatTensor)
-        labels = labels.type(torch.FloatTensor)
+        inputs_v, labels_v = data['image'], data['label']
 
         # wrap them in Variable
         if torch.cuda.is_available():
-            inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False), Variable(labels.cuda(),
-                                                                                        requires_grad=False)
+            inputs_v, labels_v = inputs_v.to(device = DEVICE, dtype = torch.float32, memory_format = torch.channels_last), labels_v.to(device = DEVICE, dtype = torch.float32, memory_format = torch.channels_last)
         else:
-            inputs_v, labels_v = Variable(inputs, requires_grad=False), Variable(labels, requires_grad=False)
-
+            inputs_v, labels_v = inputs_v.to(device = DEVICE, dtype = torch.float32,), labels_v.to(device = DEVICE, dtype = torch.float32)
+       
         # y zero the parameter gradients
-        optimizer.zero_grad()
+        optimizer.zero_grad(set_to_none=True) # 
 
         # forward + backward + optimize
-        d0, d1, d2, d3, d4, d5, d6 = net(inputs_v)
-        loss2, loss = muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v)
+        with torch.cuda.amp.autocast(enabled=use_amp): # Use Mixed Precision
+            d0, d1, d2, d3, d4, d5, d6 = net(inputs_v)
+            loss2, loss = muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v)
 
-        loss.backward()
-        optimizer.step()
+        # loss.backward()
+        # optimizer.step()
+
+        scaler.scale(loss).backward() # AMP guide https://pytorch.org/tutorials/recipes/recipes/amp_recipe.html
+        scaler.step(optimizer)
+        scaler.update()
+        optimizer.zero_grad(set_to_none=True) # set_to_none=True here can modestly improve performance
 
         # # print statistics
         running_loss += loss.data.item()
@@ -155,8 +160,15 @@ for epoch in range(0, epoch_num):
         epoch + 1, epoch_num, (i + 1) * batch_size_train, train_num, ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
 
         if ite_num % save_frq == 0:
+            
+            if use_amp:
+                checkpoint = {"model": net.state_dict(),"optimizer": optimizer.state_dict(),"scaler": scaler.state_dict()}
+                torch.save(checkpoint, model_dir + model_name+"_bce_itr_%d_train_%3f_tar_%3f.pth" % (ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
+            
+            else:
+                torch.save(net.state_dict(), model_dir + model_name+"_bce_itr_%d_train_%3f_tar_%3f.pth" % (ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
+    
 
-            torch.save(net.state_dict(), model_dir + model_name+"_bce_itr_%d_train_%3f_tar_%3f.pth" % (ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
             running_loss = 0.0
             running_tar_loss = 0.0
             net.train()  # resume train

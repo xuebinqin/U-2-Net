@@ -24,7 +24,7 @@ class REBNCONV(nn.Module):
     def __init__(self, in_ch=3, out_ch=3, dilate=1):
         super(REBNCONV, self).__init__()
 
-        self.conv_s1 = nn.Conv2d(in_ch, out_ch, 3, padding=1 * dilate, dilation=1 * dilate)
+        self.conv_s1 = nn.Conv2d(in_ch, out_ch, 3, padding=1 * dilate, dilation=1 * dilate, bias = False) # because we are using BN
         self.bn_s1 = nn.BatchNorm2d(out_ch)
         self.relu_s1 = nn.ReLU(inplace=True)
 
