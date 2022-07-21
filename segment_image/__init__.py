@@ -1,1 +1,1 @@
-from .bg import remove
+from .bg import *
