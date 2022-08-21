@@ -15,7 +15,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
-**(2022-Aug.-17)**
+** (2022-Aug.-17) **
 Our U<sup>2</sup>-Net models are now available on [PlayTorch](https://playtorch.dev/), where you can build your own demo and run it on your Android/iOS phone. Try out this demo on [![PlayTorch Demo](https://github.com/facebookresearch/playtorch/blob/main/website/static/assets/playtorch_badge.svg)](https://playtorch.dev/snack/@playtorch/u2net/) and bring your ideas about U<sup>2</sup>-Net to truth in minutes!
 
 ** (2022-Jul.-5)** Our new work **Highly Accurate Dichotomous Image Segmentation (DIS) [**Project Page**](https://xuebinqin.github.io/dis/index.html), [**Github**](https://github.com/xuebinqin/DIS) is accepted by ECCV 2022. Our code and dataset will be released before July 17th, 2022. Please be aware of our updates. 
