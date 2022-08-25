@@ -15,6 +15,9 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+** (2022-Aug.-24) ** We are glad to announce that our U<sup>2</sup>-Net published in Pattern Recognition has been awarded the 2020 Pattern Recognition BEST PAPER AWARD !!!
+![u2net-best-paper](figures/u2net-best-paper.jpg)
+
 ** (2022-Aug.-17) **
 Our U<sup>2</sup>-Net models are now available on [PlayTorch](https://playtorch.dev/), where you can build your own demo and run it on your Android/iOS phone. Try out this demo on [![PlayTorch Demo](https://github.com/facebookresearch/playtorch/blob/main/website/static/assets/playtorch_badge.svg)](https://playtorch.dev/snack/@playtorch/u2net/) and bring your ideas about U<sup>2</sup>-Net to truth in minutes!
 
