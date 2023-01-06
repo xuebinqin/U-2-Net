@@ -1,0 +1,6 @@
+*.zip
+train_data/*
+test_data/u2net_results/
+test_data/u2netp_results/
+saved_models/*
+__pycache__/
