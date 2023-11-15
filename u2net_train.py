@@ -48,17 +48,17 @@ def muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v):
 
 model_name = 'u2net' #'u2netp'
 
-data_dir = os.path.join(os.getcwd(), 'train_data' + os.sep)
+data_dir = os.path.join(os.getcwd(), '/content/Train_data' + os.sep)
 tra_image_dir = os.path.join('TDP_IMAGES' + os.sep)
 tra_label_dir = os.path.join('TDP_MASKS' + os.sep)
 
 image_ext = '.jpg'
 label_ext = '.png'
 
-model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
+model_dir = os.path.join(os.getcwd(), '/content/U-2-Net/saved_models', model_name + os.sep)
 
-epoch_num = 100000
-batch_size_train = 12
+epoch_num = 20
+batch_size_train = 16
 batch_size_val = 1
 train_num = 0
 val_num = 0
@@ -115,7 +115,7 @@ running_tar_loss = 0.0
 ite_num4val = 0
 # save_frq = 2000 # save the model every 2000 iterations
 # Check if there is a pre-trained model to load
-pretrained_model_path = "" 
+pretrained_model_path = "/content/U-2-Net/saved_models/u2net/u2net.pth" 
 
 if os.path.exists(pretrained_model_path):
     # Load the pre-trained model
