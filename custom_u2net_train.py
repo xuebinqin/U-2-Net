@@ -26,7 +26,8 @@ from model import U2NETP
 from tqdm import tqdm
 from model_processing.prepare_model import get_latest_model, get_latest_version
 from model_processing.convert_model import convert_model_to_onnx
-from u2net_test import test_model
+from custom_u2net_test import test_model
+from model_processing.upload_model_to_S3bucket import upload_folder_to_s3
 
 
 
@@ -70,11 +71,9 @@ def main():
 
     model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
 
-    epoch_num = 30
+    epoch_num = 100
     batch_size_train = 32
-    batch_size_val = 1
     train_num = 0
-    val_num = 0
 
     tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*' + image_ext)
 
@@ -191,6 +190,10 @@ def main():
     #convert model to onnx
     latest_model= os.path.join(model_dir,model_name)
     convert_model_to_onnx(latest_model)
+
+    #upload model to AWS S3 bucket
+    upload_folder_to_s3(model_dir,'tdp-model')
+
 if __name__ == '__main__':
     main()
      
