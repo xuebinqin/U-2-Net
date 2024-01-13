@@ -24,6 +24,16 @@ from data_loader import SalObjDataset
 from model import U2NET
 from model import U2NETP
 
+import argparse
+
+parser = argparse.ArgumentParser(description='Bot trainer')
+
+parser.add_argument('--input_images', help='path to the image folder')
+parser.add_argument('--input_masks', help='path to the masks folder')
+parser.add_argument('--model_name', help='can either be u2net or u2netp')
+
+args = parser.parse_args()
+
 # ------- 1. define loss function --------
 
 bce_loss = nn.BCELoss(size_average=True)
@@ -46,11 +56,11 @@ def muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v):
 
 # ------- 2. set the directory of training dataset --------
 
-model_name = 'u2net' #'u2netp'
+model_name = args.model_name
 
 data_dir = os.path.join(os.getcwd(), 'train_data' + os.sep)
-tra_image_dir = os.path.join('DUTS', 'DUTS-TR', 'DUTS-TR', 'im_aug' + os.sep)
-tra_label_dir = os.path.join('DUTS', 'DUTS-TR', 'DUTS-TR', 'gt_aug' + os.sep)
+tra_image_dir = args.input_images
+tra_label_dir = args.input_masks
 
 image_ext = '.jpg'
 label_ext = '.png'
@@ -161,4 +171,3 @@ for epoch in range(0, epoch_num):
             running_tar_loss = 0.0
             net.train()  # resume train
             ite_num4val = 0
-
