@@ -1,3 +1,4 @@
+import cv2
 import os
 from skimage import io, transform
 from skimage.filters import gaussian
@@ -56,7 +57,7 @@ def save_output(image_name,pred,d_dir,sigma=2,alpha=0.5):
     alpha = alpha
     im_comp = image*alpha+pd*(1-alpha)
 
-    print(im_comp.shape)
+    print(im_comp.shape, type(im_comp))
 
 
     img_name = image_name.split(os.sep)[-1]
@@ -65,7 +66,8 @@ def save_output(image_name,pred,d_dir,sigma=2,alpha=0.5):
     imidx = bbb[0]
     for i in range(1,len(bbb)):
         imidx = imidx + "." + bbb[i]
-    io.imsave(d_dir+'/'+imidx+'_sigma_' + str(sigma) + '_alpha_' + str(alpha) + '_composite.png',im_comp)
+    cv2.imwrite(d_dir+'/'+imidx+'_sigma_' + str(sigma) + '_alpha_' + str(alpha) + '_composite.png',
+              im_comp)
 
 def main():
 
