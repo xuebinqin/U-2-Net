@@ -48,17 +48,17 @@ def muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v):
 
 model_name = 'u2net' #'u2netp'
 
-data_dir = os.path.join(os.getcwd(), 'train_data' + os.sep)
-tra_image_dir = os.path.join('DUTS', 'DUTS-TR', 'DUTS-TR', 'im_aug' + os.sep)
-tra_label_dir = os.path.join('DUTS', 'DUTS-TR', 'DUTS-TR', 'gt_aug' + os.sep)
+data_dir = os.path.join(os.getcwd(), '/content/Train_data' + os.sep)
+tra_image_dir = os.path.join('TDP_IMAGES' + os.sep)
+tra_label_dir = os.path.join('TDP_MASKS' + os.sep)
 
 image_ext = '.jpg'
 label_ext = '.png'
 
-model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
+model_dir = os.path.join(os.getcwd(), '/content/U-2-Net/saved_models', model_name + os.sep)
 
-epoch_num = 100000
-batch_size_train = 12
+epoch_num = 20
+batch_size_train = 16
 batch_size_val = 1
 train_num = 0
 val_num = 0
@@ -113,7 +113,16 @@ ite_num = 0
 running_loss = 0.0
 running_tar_loss = 0.0
 ite_num4val = 0
-save_frq = 2000 # save the model every 2000 iterations
+# save_frq = 2000 # save the model every 2000 iterations
+# Check if there is a pre-trained model to load
+pretrained_model_path = "/content/U-2-Net/saved_models/u2net/u2net.pth" 
+
+if os.path.exists(pretrained_model_path):
+    # Load the pre-trained model
+    net.load_state_dict(torch.load(pretrained_model_path))
+    print(f"Pre-trained model loaded from {pretrained_model_path}")
+else:
+    print("No pre-trained model found. Training from scratch.")
 
 for epoch in range(0, epoch_num):
     net.train()
@@ -154,11 +163,15 @@ for epoch in range(0, epoch_num):
         print("[epoch: %3d/%3d, batch: %5d/%5d, ite: %d] train loss: %3f, tar: %3f " % (
         epoch + 1, epoch_num, (i + 1) * batch_size_train, train_num, ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
 
-        if ite_num % save_frq == 0:
+        # if ite_num % save_frq == 0:
 
-            torch.save(net.state_dict(), model_dir + model_name+"_bce_itr_%d_train_%3f_tar_%3f.pth" % (ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
-            running_loss = 0.0
-            running_tar_loss = 0.0
-            net.train()  # resume train
-            ite_num4val = 0
+        #     torch.save(net.state_dict(), model_dir + model_name+"_bce_itr_%d_train_%3f_tar_%3f.pth" % (ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
+        #     running_loss = 0.0
+        #     running_tar_loss = 0.0
+        #     net.train()  # resume train
+        #     ite_num4val = 0
 
+# Save the final model after the entire training process
+final_model_name = f"{model_name}_final_itr_{ite_num}_train_{running_loss / ite_num4val:.3f}_tar_{running_tar_loss / ite_num4val:.3f}.pth"
+torch.save(net.state_dict(), model_dir + final_model_name)
+print(f"Final model saved as {final_model_name}")

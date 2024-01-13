@@ -1,0 +1,199 @@
+import os
+import torch
+import torchvision
+from torch.autograd import Variable
+import torch.nn as nn
+import torch.nn.functional as F
+
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms, utils
+import torch.optim as optim
+import torchvision.transforms as standard_transforms
+
+import numpy as np
+import glob
+import os
+
+from data_loader import Rescale
+from data_loader import RescaleT
+from data_loader import RandomCrop
+from data_loader import ToTensor
+from data_loader import ToTensorLab
+from data_loader import SalObjDataset
+
+from model import U2NET
+from model import U2NETP
+from tqdm import tqdm
+from model_processing.prepare_model import get_latest_model, get_latest_version
+from model_processing.convert_model import convert_model_to_onnx
+from custom_u2net_test import test_model
+from model_processing.upload_model_to_S3bucket import upload_folder_to_s3
+
+
+
+def main():
+    # ------- 1. define loss function --------
+
+    bce_loss = nn.BCELoss(size_average=True)
+
+    def muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v):
+        # Convert all tensors to torch.float32
+        d0, d1, d2, d3, d4, d5, d6, labels_v = (
+            d0.float(), d1.float(), d2.float(), d3.float(), d4.float(), d5.float(), d6.float(), labels_v.float()
+        )
+
+        loss0 = bce_loss(d0, labels_v)
+        loss1 = bce_loss(d1, labels_v)
+        loss2 = bce_loss(d2, labels_v)
+        loss3 = bce_loss(d3, labels_v)
+        loss4 = bce_loss(d4, labels_v)
+        loss5 = bce_loss(d5, labels_v)
+        loss6 = bce_loss(d6, labels_v)
+
+        loss = loss0 + loss1 + loss2 + loss3 + loss4 + loss5 + loss6
+        print("l0: %3f, l1: %3f, l2: %3f, l3: %3f, l4: %3f, l5: %3f, l6: %3f\n" % (
+        loss0.data.item(), loss1.data.item(), loss2.data.item(), loss3.data.item(), loss4.data.item(), loss5.data.item(),
+        loss6.data.item()))
+
+        return loss0, loss
+
+
+    # ------- 2. set the directory of training dataset --------
+
+    model_name = 'u2net' #'u2netp'
+
+    data_dir = os.path.join(os.getcwd(), 'my_data' + os.sep)
+    tra_image_dir = os.path.join('TDP_train_dataset','TDP_IMAGES' + os.sep)
+    tra_label_dir = os.path.join('TDP_train_dataset','TDP_MASKS' + os.sep)
+
+    image_ext = '.jpg'
+    label_ext = '.png'
+
+    model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
+
+    epoch_num = 100
+    batch_size_train = 32
+    train_num = 0
+
+    tra_img_name_list = glob.glob(data_dir + tra_image_dir + '*' + image_ext)
+
+    tra_lbl_name_list = []
+    for img_path in tra_img_name_list:
+        img_name = img_path.split(os.sep)[-1]
+
+        aaa = img_name.split(".")
+        bbb = aaa[0:-1]
+        imidx = bbb[0]
+        for i in range(1,len(bbb)):
+            imidx = imidx + "." + bbb[i]
+
+        tra_lbl_name_list.append(data_dir + tra_label_dir + imidx + label_ext)
+
+    print("---")
+    print("train images: ", len(tra_img_name_list))
+    print("train labels: ", len(tra_lbl_name_list))
+    print("---")
+
+    train_num = len(tra_img_name_list)
+
+    salobj_dataset = SalObjDataset(
+        img_name_list=tra_img_name_list,
+        lbl_name_list=tra_lbl_name_list,
+        transform=transforms.Compose([
+            RescaleT(320),
+            RandomCrop(288),
+            ToTensorLab(flag=0)]))
+    salobj_dataloader = DataLoader(salobj_dataset, batch_size=batch_size_train, shuffle=True, num_workers=1)
+
+    # ------- 3. define model --------
+    # define the net
+    if(model_name=='u2net'):
+        net = U2NET(3, 1)
+    elif(model_name=='u2netp'):
+        net = U2NETP(3,1)
+
+    if torch.cuda.is_available():
+        net.cuda()
+
+    # ------- 4. define optimizer --------
+    print("---define optimizer...")
+    optimizer = optim.Adam(net.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)
+
+    # ------- 5. training process --------
+    print("---start training...")
+    ite_num = 0
+    running_loss = 0.0
+    running_tar_loss = 0.0
+    ite_num4val = 0
+    # save_frq = 2000 # save the model every 2000 iterations
+    # Check if there is a pre-trained model to load
+    pretrained_model_path = get_latest_model("saved_models/u2net") 
+
+    if os.path.exists(pretrained_model_path):
+        # Load the pre-trained model
+        net.load_state_dict(torch.load(pretrained_model_path))
+        print(f"Pre-trained model loaded from {pretrained_model_path}")
+    else:
+        print("No pre-trained model found. Training from scratch.")
+
+    for epoch in tqdm(range(0, epoch_num)):
+        net.train()
+
+        for i, data in tqdm(enumerate(salobj_dataloader)):
+            ite_num = ite_num + 1
+            ite_num4val = ite_num4val + 1
+
+            inputs, labels = data['image'], data['label']
+
+            inputs = inputs.type(torch.FloatTensor)
+            labels = labels.type(torch.FloatTensor)
+
+            # wrap them in Variable
+            if torch.cuda.is_available():
+                inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False), Variable(labels.cuda(),
+                                                                                            requires_grad=False)
+            else:
+                inputs_v, labels_v = Variable(inputs, requires_grad=False), Variable(labels, requires_grad=False)
+
+            # y zero the parameter gradients
+            optimizer.zero_grad()
+
+            # forward + backward + optimize
+            d0, d1, d2, d3, d4, d5, d6 = net(inputs_v)
+            loss2, loss = muti_bce_loss_fusion(d0, d1, d2, d3, d4, d5, d6, labels_v)
+
+            loss.backward()
+            optimizer.step()
+
+            # # print statistics
+            running_loss += loss.data.item()
+            running_tar_loss += loss2.data.item()
+
+            # del temporary outputs and loss
+            del d0, d1, d2, d3, d4, d5, d6, loss2, loss
+
+            print("[epoch: %3d/%3d, batch: %5d/%5d, ite: %d] train loss: %3f, tar: %3f " % (
+            epoch + 1, epoch_num, (i + 1) * batch_size_train, train_num, ite_num, running_loss / ite_num4val, running_tar_loss / ite_num4val))
+        
+        #test_model
+        test_model(net)
+
+    # Save model
+    latest_version = get_latest_version(pretrained_model_path)
+    if latest_version.isdigit():
+        model_name = f"u2net_version_{int(latest_version)+1}.pth"
+    else:
+        model_name = f"u2net_version_1.pth" 
+    torch.save(net.state_dict(), model_dir + model_name)
+    print(f"Final model saved as {model_name}")
+
+    #convert model to onnx
+    latest_model= os.path.join(model_dir,model_name)
+    convert_model_to_onnx(latest_model)
+
+    #upload model to AWS S3 bucket
+    upload_folder_to_s3(model_dir,'tdp-model')
+
+if __name__ == '__main__':
+    main()
+     
