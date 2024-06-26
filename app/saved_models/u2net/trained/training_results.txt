@@ -1,0 +1,1 @@
+Success/ train loss = 0.3887115478515625

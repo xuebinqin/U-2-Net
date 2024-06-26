@@ -1,0 +1,14 @@
+---
+train images: 12
+train labels: 12
+---
+20220314-181121-[epoch:   1/  5, batch:    10/   12, ite: 1] train loss: 0.312965, tar: 0.025978 
+20220314-181121-[epoch:   1/  5, batch:    20/   12, ite: 2] train loss: 0.454054, tar: 0.047328 
+20220314-181121-[epoch:   2/  5, batch:    10/   12, ite: 3] train loss: 0.416427, tar: 0.040754 
+20220314-181121-[epoch:   2/  5, batch:    20/   12, ite: 4] train loss: 0.373398, tar: 0.037101 
+20220314-181121-[epoch:   3/  5, batch:    10/   12, ite: 5] train loss: 0.353424, tar: 0.033745 
+20220314-181121-[epoch:   3/  5, batch:    20/   12, ite: 6] train loss: 0.334980, tar: 0.039326 
+20220314-181121-[epoch:   4/  5, batch:    10/   12, ite: 7] train loss: 0.321276, tar: 0.033520 
+20220314-181121-[epoch:   4/  5, batch:    20/   12, ite: 8] train loss: 0.380756, tar: 0.036187 
+20220314-181121-[epoch:   5/  5, batch:    10/   12, ite: 9] train loss: 0.356242, tar: 0.033089 
+20220314-181121-[epoch:   5/  5, batch:    20/   12, ite: 10] train loss: 0.388712, tar: 0.033836 

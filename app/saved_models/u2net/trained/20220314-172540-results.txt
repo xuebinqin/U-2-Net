@@ -1,0 +1,4 @@
+---
+train images: 12
+train labels: 12
+---
