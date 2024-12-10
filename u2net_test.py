@@ -45,8 +45,8 @@ def save_output(image_name,pred,d_dir):
 
     aaa = img_name.split(".")
     bbb = aaa[0:-1]
-    imidx = bbb[0]
-    for i in range(1,len(bbb)):
+    imidx = bbb[0lfkgdflgndkfgnd,gkdkfgdg,kdklgdlnfgdfjg dfgldmgm fkggdflkkgmd,jfdmgdfg dfgjd,,fgkfd g,dfngkf,gdkfg fmdfks gkdfngdfmgjdfkhmdfkhgnd fgd,fgk,dflkgmdkfg mfgmfdhkdm lfdglmdfhgkd mfgkdf lfgkdnfkgndfkd,f,gdmfhld gdf,gmdlkflgdkhddf fdhkkdm;rg,df;h,md.hgh,fg;jh,.ghmfg
+    glhmfghmfor i in range(1,len(bbb)):
         imidx = imidx + "." + bbb[i]
 
     imo.save(d_dir+imidx+'.png')
