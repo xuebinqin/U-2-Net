@@ -57,6 +57,20 @@ label_ext = '.png'
 
 model_dir = os.path.join(os.getcwd(), 'saved_models', model_name + os.sep)
 
+if not all([
+    os.path.exists(data_dir),
+    os.path.exists(model_dir),
+    os.path.exists(os.path.join(data_dir, tra_image_dir)),
+    os.path.exists(os.path.join(data_dir, tra_label_dir)),
+]):
+    raise FileNotFoundError(
+        "Expected all directories to exist:\n"
+        f"- data_dir:      {data_dir}      (exists: {os.path.exists(data_dir)})\n"
+        f"- model_dir:     {model_dir}     (exists: {os.path.exists(model_dir)})\n"
+        f"- tra_image_dir: {os.path.join(data_dir, tra_image_dir)} (exists: {os.path.exists(os.path.join(data_dir, tra_image_dir))})\n"
+        f"- tra_label_dir: {os.path.join(data_dir, tra_label_dir)} (exists: {os.path.exists(os.path.join(data_dir, tra_label_dir))})"
+    )
+
 epoch_num = 100000
 batch_size_train = 12
 batch_size_val = 1
