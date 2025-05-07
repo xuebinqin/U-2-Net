@@ -100,7 +100,8 @@ if(model_name=='u2net'):
 elif(model_name=='u2netp'):
     net = U2NETP(3,1)
 
-if torch.cuda.is_available():
+cuda_is_available = torch.cuda.is_available();
+if cuda_is_available:
     net.cuda()
 
 # ------- 4. define optimizer --------
@@ -128,7 +129,7 @@ for epoch in range(0, epoch_num):
         labels = labels.type(torch.FloatTensor)
 
         # wrap them in Variable
-        if torch.cuda.is_available():
+        if cuda_is_available:
             inputs_v, labels_v = Variable(inputs.cuda(), requires_grad=False), Variable(labels.cuda(),
                                                                                         requires_grad=False)
         else:
