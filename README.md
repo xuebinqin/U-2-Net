@@ -15,6 +15,9 @@ __Contact__: xuebin[at]ualberta[dot]ca
 
 ## Updates !!!
 
+** (2025-Jun.-9) ** We provide a local project based on onnxruntime-web and the onnx model, which uses the react framework and enables you to reason the model locally in the browser !!!
+ [**Github**](https://github.com/yuedud/aicut) Our code has been released. Please keep an eye on subsequent updates.
+
 ** (2022-Aug.-24) ** We are glad to announce that our U<sup>2</sup>-Net published in Pattern Recognition has been awarded the 2020 Pattern Recognition BEST PAPER AWARD !!!
 ![u2net-best-paper](figures/u2net-best-paper.jpg)
 
