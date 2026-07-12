@@ -1,8 +1,8 @@
 <p align="center">
   <img width="320" height="320" src="figures/U2Net_Logo.png">
-  
+
   <h1 align="center">U<sup>2</sup>-Net: U Square Net</h1>
-    
+
 </p>
 
 This is the official repo for our paper **U<sup>2</sup>-Net(U square net)** published in Pattern Recognition 2020:
@@ -21,7 +21,7 @@ __Contact__: xuebin[at]ualberta[dot]ca
 ** (2022-Aug.-17) **
 Our U<sup>2</sup>-Net models are now available on [PlayTorch](https://playtorch.dev/), where you can build your own demo and run it on your Android/iOS phone. Try out this demo on [![PlayTorch Demo](https://github.com/facebookresearch/playtorch/blob/main/website/static/assets/playtorch_badge.svg)](https://playtorch.dev/snack/@playtorch/u2net/) and bring your ideas about U<sup>2</sup>-Net to truth in minutes!
 
-** (2022-Jul.-5)** Our new work **Highly Accurate Dichotomous Image Segmentation (DIS) [**Project Page**](https://xuebinqin.github.io/dis/index.html), [**Github**](https://github.com/xuebinqin/DIS) is accepted by ECCV 2022. Our code and dataset will be released before July 17th, 2022. Please be aware of our updates. 
+** (2022-Jul.-5)** Our new work **Highly Accurate Dichotomous Image Segmentation (DIS) [**Project Page**](https://xuebinqin.github.io/dis/index.html), [**Github**](https://github.com/xuebinqin/DIS) is accepted by ECCV 2022. Our code and dataset will be released before July 17th, 2022. Please be aware of our updates.
 ![ship-demo](figures/ship-demo.gif)
 ![bg-removal](figures/bg-removal.gif)
 ![view-move](figures/view-move.gif)
@@ -40,37 +40,37 @@ Our U<sup>2</sup>-Net models are now available on [PlayTorch](https://playtorch.
 ![hotpot](figures/hotpot.png)
 
 ** (2022-Mar-19)** Thank [**Kikedao**](https://github.com/Kikedao) for providing a fantastic webapp [**Silueta**](https://silueta.me/) based on U<sup>2</sup>-Net. More details can be found at [**https://github.com/xuebinqin/U-2-Net/issues/295**](https://github.com/xuebinqin/U-2-Net/issues/295).
-![silueta](figures/silueta.png) 
+![silueta](figures/silueta.png)
 
 ** (2022-Mar-17)** Thank [**Ezaldeen Sahb**](https://github.com/Ezaldeen99/BackgroundRemoval) for implementing the iOS library for image background removal based on U<sup>2</sup>-Net, which will greatly facilitate the developing of mobile apps.
-![close-seg](figures/swift-u2net.jpeg) 
+![close-seg](figures/swift-u2net.jpeg)
 
 <!-- ** (2022-Mar-10)** Thank [**Doron Adler**](https://github.com/Norod/U-2-Net-StyleTransfer) for training the awesome style transfer U<sup>2</sup>-Net.
 ![style-trans](figures/style-trans.JPG)  -->
 
 ** (2022-Mar-8)** Thank [**Levin Dabhi**](https://github.com/levindabhi/cloth-segmentation) for training the amazing clothes segmentation U<sup>2</sup>-Net.
-![close-seg](figures/close-seg.jpg) 
+![close-seg](figures/close-seg.jpg)
 
 ** (2022-Mar-3)** Thank [**Renato Violin**](https://github.com/renatoviolin/bg-remove-augment) for providing an awesome webapp for image background removal and replacement based on our U<sup>2</sup>-Net.
-![bg-rm-aug](figures/bg-rm-aug.gif) 
+![bg-rm-aug](figures/bg-rm-aug.gif)
 
-**(2021-Dec-21)** This [**blog**](https://rockyshikoku.medium.com/u2net-to-coreml-machine-learning-segmentation-on-iphone-eac0c721d67b) clearly describes the way of converting U<sup>2</sup>-Net to [**CoreML**](https://github.com/john-rocky/CoreML-Models) and running it on iphone. 
+**(2021-Dec-21)** This [**blog**](https://rockyshikoku.medium.com/u2net-to-coreml-machine-learning-segmentation-on-iphone-eac0c721d67b) clearly describes the way of converting U<sup>2</sup>-Net to [**CoreML**](https://github.com/john-rocky/CoreML-Models) and running it on iphone.
 
-**(2021-Nov-28)** Interesting Sky Segmentation models developed by [**xiongzhu**](https://github.com/xiongzhu666/Sky-Segmentation-and-Post-processing) using U<sup>2</sup>-Net. 
+**(2021-Nov-28)** Interesting Sky Segmentation models developed by [**xiongzhu**](https://github.com/xiongzhu666/Sky-Segmentation-and-Post-processing) using U<sup>2</sup>-Net.
 
 ![im_sky_segmentation](figures/sky-seg.png)
 
-**(2021-Nov-28)** Awesome image editing app [**Pixelmator pro**](https://www.pixelmator.com/pro/) uses U<sup>2</sup>-Net as one of its background removal models. 
+**(2021-Nov-28)** Awesome image editing app [**Pixelmator pro**](https://www.pixelmator.com/pro/) uses U<sup>2</sup>-Net as one of its background removal models.
 
 ![im_sky_segmentation](figures/pixelmator.jpg)
 
-**(2021-Aug-24)** We played a bit more about fusing the orignal image and the generated portraits to composite different styles. You can <br/> 
+**(2021-Aug-24)** We played a bit more about fusing the orignal image and the generated portraits to composite different styles. You can <br/>
 (1) Download this repo by
 ```
 git clone https://github.com/NathanUA/U-2-Net.git
 ```
 (2) Download the u2net_portrait.pth from [**GoogleDrive**](https://drive.google.com/file/d/1IG3HdpcRiDoWNookbncQjeaPN28t90yW/view?usp=sharing) or [**Baidu Pan(提取码：chgd)**](https://pan.baidu.com/s/1BYT5Ts6BxwpB8_l2sAyCkw)model and put it into the directory: ```./saved_models/u2net_portrait/```, <br/>
-(3) run the code by command 
+(3) run the code by command
 ```
 python u2net_portrait_composite.py -s 20 -a 0.5
 ```
@@ -78,7 +78,7 @@ python u2net_portrait_composite.py -s 20 -a 0.5
 
 ![im_portrait_composite](figures/im_composite.jpg)
 
-**(2021-July-16)** A new [background removal webapp](https://remove-background.net/) developed by Изатоп Василий. 
+**(2021-July-16)** A new [background removal webapp](https://remove-background.net/) developed by Изатоп Василий.
 
 ![rm_bg](figures/rm_bg.JPG)
 
@@ -95,7 +95,7 @@ python u2net_portrait_composite.py -s 20 -a 0.5
 
 ![LensOCR APP](figures/LensOCR.jpg)
 
-**(2021-Apr-18)** Thanks [**Andrea Scuderi**](https://www.linkedin.com/in/andreascuderi/) for releasing his App [**Clipping Camera**](https://apps.apple.com/us/app/clipping-camera/id1548192169?ign-mpt=uo%3D2), which is an U<sup>2</sup>-Net driven realtime camera app and "is able to detect relevant object from the scene and clip them to apply fancy filters". 
+**(2021-Apr-18)** Thanks [**Andrea Scuderi**](https://www.linkedin.com/in/andreascuderi/) for releasing his App [**Clipping Camera**](https://apps.apple.com/us/app/clipping-camera/id1548192169?ign-mpt=uo%3D2), which is an U<sup>2</sup>-Net driven realtime camera app and "is able to detect relevant object from the scene and clip them to apply fancy filters".
 
 ![Clipping Camera APP](figures/clipping_camera.jpg)
 
@@ -167,14 +167,14 @@ git clone https://github.com/NathanUA/U-2-Net.git
 
 ## Required libraries
 
-Python 3.6  
-numpy 1.15.2  
-scikit-image 0.14.0  
+Python 3.6
+numpy 1.15.2
+scikit-image 0.14.0
 python-opencv
-PIL 5.2.0  
-PyTorch 0.4.0  
-torchvision 0.2.1  
-glob  
+PIL 5.2.0
+PyTorch 0.4.0
+torchvision 0.2.1
+glob
 
 ## Usage for salient object detection
 1. Clone this repo
@@ -184,7 +184,7 @@ git clone https://github.com/NathanUA/U-2-Net.git
 2. Download the pre-trained model u2net.pth (176.3 MB) from [**GoogleDrive**](https://drive.google.com/file/d/1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ/view?usp=sharing) or [**Baidu Pan 提取码: pf9k**](https://pan.baidu.com/s/1WjwyEwDiaUjBbx_QxcXBwQ) or u2netp.pth (4.7 MB) from [**GoogleDrive**](https://drive.google.com/file/d/1rbSTGKAE-MTxBYHd-51l2hMOQPT_7EPy/view?usp=sharing) or [**Baidu Pan 提取码: 8xsi**](https://pan.baidu.com/s/10tW12OlecRpE696z8FxdNQ) and put it into the dirctory './saved_models/u2net/' and './saved_models/u2netp/'
 
 3.  Cd to the directory 'U-2-Net', run the train or inference process by command: ```python u2net_train.py```
-or ```python u2net_test.py``` respectively. The 'model_name' in both files can be changed to 'u2net' or 'u2netp' for using different models.  
+or ```python u2net_test.py``` respectively. The 'model_name' in both files can be changed to 'u2net' or 'u2netp' for using different models.
 
  We also provide the predicted saliency maps ([u2net results](https://drive.google.com/file/d/1mZFWlS4WygWh1eVI8vK2Ad9LrPq4Hp5v/view?usp=sharing),[u2netp results](https://drive.google.com/file/d/1j2pU7vyhOO30C2S_FJuRdmAmMt3-xmjD/view?usp=sharing)) for datasets SOD, ECSSD, DUT-OMRON, PASCAL-S, HKU-IS and DUTS-TE.
 
